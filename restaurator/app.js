@@ -4,6 +4,11 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const expressLayouts = require('express-ejs-layouts');
+const mongoose = require('mongoose');
+const session = require('express-session');
+const mongoStore = require('connect-mongo')(session);
+
 
 const index = require('./routes/index.routes');
 const restaurants = require('./routes/restaurants.routes');
