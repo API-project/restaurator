@@ -1,15 +1,11 @@
 const mongoose = require('mongoose');
 const mongooseEmail = require('mongoose-type-email');
-const userSchema = new mongoose.Schema({
-     username: {
-         type: String,
-         required: [true, 'Username is required'],
-         unique: true
-     },
+const restaurantSchema = new mongoose.Schema({
 
      name: {
          type: String,
          required: [true, 'Name is required'],
+         unique: true,
      },
 
      email: {
@@ -21,7 +17,17 @@ const userSchema = new mongoose.Schema({
          required: [true, 'User needs a password']
      },
 
-     summary: {
+     category: {
+         type: String,
+
+     },
+
+     description: {
+         type: String,
+
+     },
+
+     location: {
          type: String,
 
      },
@@ -31,16 +37,8 @@ const userSchema = new mongoose.Schema({
 
      },
 
-     company: {
-         type: String,
 
-     },
-
-     jobTitle: {
-         type: String,
-
-     },
  }, { timestamps: true });
 
- const User = mongoose.model('User', userSchema);
-  module.exports = User;
+ const Restaurant = mongoose.model('Restaurant', restaurantSchema);
+  module.exports = Restaurant;
