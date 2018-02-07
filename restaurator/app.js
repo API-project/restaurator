@@ -16,6 +16,8 @@ const auth = require ('./routes/auth.routes');
 const app = express();
 
 // view engine setup
+app.use(expressLayouts);
+app.set('layout','layouts/main');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
