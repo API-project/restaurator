@@ -28,7 +28,7 @@ const restaurantSchema = new mongoose.Schema({
      imageUrl: {
          type: String,
      },
-     file: String
+     file: String,
 
  }, { timestamps: true });
 

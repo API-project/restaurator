@@ -26,7 +26,7 @@ module.exports.create = (req, res) => {
   new Restaurant({
     name: req.body.name,
     description: req.body.description,
-    file: `/documents/${req.file.filename}`,
+    file: `/documents/${req.file}`,
     location: {
       type: 'Point',
       coordinates: [req.body.latitude, req.body.longitude]
