@@ -1,25 +1,43 @@
 module.exports.signup = (req, res, next) => {
-  res.render('auth/signup', {title: 'SignUp'});
+  res.render('auth/signup');
 };
 
 module.exports.doSignup = (req, res, next) => {
-    User.findOne({ username: req.body.username })
-        .then(user => {
-            if (user != null) {
-                res.render('auth/signup', { user: user, error: { username: 'Username already exists'} })
-            } else {
-                user = new User(req.body);
-                user.save()
-                    .then(() => {
-                        req.session.currentUser = user;
-                        res.redirect('/');
-                    }).catch(error => {
-                        if (error instanceof mongoose.Error.ValidationError) {
-                            res.render('auth/signup', { user: user, error: error.errors })
-                        } else {
-                            next(error);
-                        }
-                    });
-            }
-        }).catch(error => next(error));
+  const username = req.body.username;
+  const password = req.body.password;
+
+  if (username === "" || password === "") {
+    res.render("auth/signup", {
+      message: "Indicate username and password"
+    });
+    return;
+  }
+  User.findOne({
+      username: req.body.username
+    })
+    .then(user => {
+      if (user != null) {
+        res.render('auth/signup', {
+          user: user,
+          error: {
+            username: 'Username already exists'
+          }
+        })
+        const salt = bcrypt.genSaltSync(bcryptSalt);
+        const hashPass = bcrypt.hashSync(password, salt);
+        const newUser = new User({
+          username,
+          password: hashPass
+        });
+        newUser.save((err) => {
+          if (err) {
+            res.render("auth/signup", {
+              error: "Something went wrong"
+            });
+          } else {
+            res.redirect("/");
+          }
+        });
+      }
+    }).catch(error => next(error));
 }

@@ -1,5 +1,9 @@
 const mongoose = require('mongoose');
 const mongooseEmail = require('mongoose-type-email');
+const User = require('../models/user.model');
+const bcrypt = require("bcryptjs");
+const bcryptSalt = 10;
+
 const userSchema = new mongoose.Schema({
      username: {
          type: String,
