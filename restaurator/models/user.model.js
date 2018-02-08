@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 const mongooseEmail = require('mongoose-type-email');
+const bcrypt = require("bcryptjs");
+const bcryptSalt = 10;
+
 const userSchema = new mongoose.Schema({
      username: {
          type: String,
@@ -25,8 +28,6 @@ const userSchema = new mongoose.Schema({
          type: String,
 
      },
-
-
  }, { timestamps: true });
 
  const User = mongoose.model('User', userSchema);
