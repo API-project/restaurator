@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const expressLayouts = require('express-ejs-layouts');
 const mongoose = require('mongoose');
+const mongooseEmail = require('mongoose-type-email');
 const session = require('express-session');
 const mongoStore = require('connect-mongo')(session);
 
