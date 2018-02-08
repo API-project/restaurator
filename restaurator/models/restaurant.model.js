@@ -7,7 +7,6 @@ const restaurantSchema = new mongoose.Schema({
          required: [true, 'Name is required'],
          unique: true,
      },
-
      email: {
          type: mongoose.SchemaTypes.Email,
          required: [true, 'Email is required'],
@@ -16,27 +15,20 @@ const restaurantSchema = new mongoose.Schema({
          type: String,
          required: [true, 'User needs a password']
      },
-
      category: {
          type: String,
-
      },
-
      description: {
          type: String,
-
      },
-
      location: {
-         type: String,
-
-     },
-
+        type: { type: String },
+        coordinates: [Number]
+      },
      imageUrl: {
          type: String,
-
      },
-
+     file: String
 
  }, { timestamps: true });
 
