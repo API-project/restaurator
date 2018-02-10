@@ -12,8 +12,10 @@ const MongoStore = require('connect-mongo')(session);
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+const flash = require("connect-flash");
 
 require('./configs/db.config');
+require('./configs/passport.config').setup(passport);
 
 const index = require('./routes/index.routes');
 const restaurants = require('./routes/restaurants.routes');
@@ -21,10 +23,10 @@ const auth = require ('./routes/auth.routes');
 const app = express();
 
 // view engine setup
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 app.use(expressLayouts);
 app.set('layout','layouts/main');
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -45,6 +47,12 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
+app.use((req, res, next) => {
+  res.locals.flash = req.flash()|| {};
+  next();
+})
+
 app.use('/', index);
 app.use('/', auth);
 app.use('/restaurants', restaurants);

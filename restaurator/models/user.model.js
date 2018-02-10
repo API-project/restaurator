@@ -30,5 +30,9 @@ const userSchema = new mongoose.Schema({
      },
  }, { timestamps: true });
 
+userSchema.methods.checkPassword = function (password) {
+  return bcrypt.compare(password, this.password);
+}
+
  const User = mongoose.model('User', userSchema);
  module.exports = User;
