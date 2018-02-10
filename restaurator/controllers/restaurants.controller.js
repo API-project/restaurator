@@ -2,6 +2,7 @@ const Restaurant = require('../models/restaurants.model');
 const bcrypt = require('bcryptjs');
 const bcryptSalt = 10;
 
+
 module.exports.index = (req, res) => {
   Restaurant.find({}).then((restaurants) => {
     res.render("restaurants/index", {

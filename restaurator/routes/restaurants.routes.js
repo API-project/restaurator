@@ -8,4 +8,5 @@ router.post('/new', restaurantsController.create);
 router.post('/:id/delete', restaurantsController.delete);
 router.get('/:id/pic', restaurantsController.pic);
 
+
 module.exports = router;
