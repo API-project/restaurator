@@ -12,8 +12,10 @@ const MongoStore = require('connect-mongo')(session);
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+const flash = require("connect-flash");
 
 require('./configs/db.config');
+require('./configs/passport.config').setup(passport);
 
 const index = require('./routes/index.routes');
 const restaurants = require('./routes/restaurants.routes');
@@ -45,6 +47,12 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
+app.use((req, res, next) => {
+  res.locals.flash = req.flash()|| {};
+  next();
+})
+
 app.use('/', index);
 app.use('/', auth);
 app.use('/restaurants', restaurants);
