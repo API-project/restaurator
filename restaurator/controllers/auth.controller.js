@@ -1,6 +1,7 @@
 const User = require('../models/user.model');
 const bcrypt = require('bcryptjs');
 const bcryptSalt = 10;
+
 module.exports.signup = (req, res, next) => {
   res.render('auth/signup');
 };
@@ -43,4 +44,13 @@ module.exports.doSignup = (req, res, next) => {
           }
         });
       })
+    };
+
+    module.exports.login = (req, res, next) => {
+      res.render('auth/login');
+    };
+    module.exports.doLogin = (req, res, next) => {
+      const password = req.body.password;
+      const name = req.body.name;
+      res.render('auth/login');
     };

@@ -9,6 +9,9 @@ const mongoose = require('mongoose');
 const mongooseEmail = require('mongoose-type-email');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
+const bcrypt = require("bcryptjs");
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
 
 require('./configs/db.config');
 
@@ -32,13 +35,16 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
   secret: "restaurator-secret",
+  resave: true,
+  saveUninitialized: true,
   cookie: { maxAge: 60000 },
   store: new MongoStore({
     mongooseConnection: mongoose.connection,
     ttl: 24 * 60 * 60 // 1 day
   })
 }));
-
+app.use(passport.initialize());
+app.use(passport.session());
 app.use('/', index);
 app.use('/', auth);
 app.use('/restaurants', restaurants);
