@@ -42,7 +42,7 @@ module.exports.doSignup = (req, res, next) => {
               error: "Something went wrong"
             });
           } else {
-            res.redirect("/");
+            res.redirect("auth/profile");
           }
         });
       })
@@ -75,10 +75,16 @@ module.exports.doSignup = (req, res, next) => {
                 next(error);
               } else {
                 req.flash('welcome', 'Welcome back');
-                res.redirect('/');
+                res.redirect('auth/profile');
               }
             });
           }
         })(req, res, next);
       }
     }
+
+
+module.exports.logout = (req, res, next) => {
+  req.logout();
+  res.redirect('/login');
+}

@@ -14,12 +14,15 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const flash = require("connect-flash");
 
+// Import DB config
 require('./configs/db.config');
 require('./configs/passport.config').setup(passport);
 
-const index = require('./routes/index.routes');
+// Routes
+const home = require('./routes/home.routes');
 const restaurants = require('./routes/restaurants.routes');
 const auth = require ('./routes/auth.routes');
+
 const app = express();
 
 // view engine setup
@@ -53,7 +56,8 @@ app.use((req, res, next) => {
   next();
 })
 
-app.use('/', index);
+
+app.use('/', home);
 app.use('/', auth);
 app.use('/restaurants', restaurants);
 
