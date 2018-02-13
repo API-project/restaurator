@@ -3,6 +3,25 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+html {
+  height: 100%;
+  margin: 0;
+  width: 800px;
+  height: 400 px;
+  padding: 20px;
+}
+
 a {
   color: #00B7FF;
+}
+
+#map {
+  width: 100%;
+  height: 400px;
+  background: lightgray;
+  margin-bottom:  20px;
+}
+
+article {
+  padding:  20px;
 }

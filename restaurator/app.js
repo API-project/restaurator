@@ -18,6 +18,8 @@ const flash = require("connect-flash");
 require('./configs/db.config');
 require('./configs/passport.config').setup(passport);
 
+
+
 // Routes
 const home = require('./routes/home.routes');
 const restaurants = require('./routes/restaurants.routes');
