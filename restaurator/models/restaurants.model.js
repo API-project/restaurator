@@ -3,7 +3,8 @@ const mongooseEmail = require('mongoose-type-email');
 const bcrypt = require("bcryptjs");
 const bcryptSalt = 10;
 
-const restaurantSchema = new mongoose.Schema({
+
+const RestaurantSchema = new mongoose.Schema({
 
      name: {
          type: String,
@@ -38,5 +39,5 @@ const restaurantSchema = new mongoose.Schema({
 
  }, { timestamps: true });
 
- const Restaurant = mongoose.model('Restaurant', restaurantSchema);
+ const Restaurant = mongoose.model('Restaurant', RestaurantSchema);
   module.exports = Restaurant;

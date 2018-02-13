@@ -1,10 +1,5 @@
-const mongoose = require('mongoose');
 
-require('../config/db.config');
-
-const Restaurants = require('../models/product.model');
-
-const Restaurants = [{
+const home = [{
   "category": "hamburgueserías",
   "imageUrl": "https://11870.com/pro/home-burger-bar/media/35237785",
   "location": {
@@ -1105,10 +1100,5 @@ const Restaurants = [{
   "name": "Yakitoro",
   "email": "yakitoro@yakitoro.com"
 }]
-Restaurant.create(restaurants).then((docs) => {
-  docs.forEach((restaurant) => {
-    console.log(restaurant.name)
-  });
 
-  mongoose.connection.close();
-});
+ module.exports = home;
