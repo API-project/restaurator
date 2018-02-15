@@ -6,6 +6,8 @@ router.get('/index', restaurantsController.index);
 router.get('/new', restaurantsController.new);
 router.get('/show', restaurantsController.show);
 router.post('/create', restaurantsController.create);
+router.post('/:id/edit', restaurantsController.edit);
+// router.post('/update', restaurantsController.update);
 router.post('/:id/delete', restaurantsController.delete);
 router.get('/:id/pic', restaurantsController.pic);
 
