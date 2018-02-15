@@ -39,14 +39,14 @@ module.exports.create = (req, res) => {
     error.password = 'Passoword is required';
   }
   if (error.name || error.email || error.password) {
-    res.render("/restaurants/form", {
+    res.render("/restaurants/new", {
       error
     });
   }
 
   Restaurant.findOne({email}, (err, restaurant) => {
     if (restaurant !== null) {
-      res.render("/restaurants/form", {
+      res.render("/restaurants/new", {
         error: "The name already exists"
       });
       return;
@@ -69,7 +69,7 @@ module.exports.create = (req, res) => {
       })
       .catch(err => {
         console.log(err)
-        res.render("restaurants/form", {
+        res.render("restaurants/new", {
           error: "Something went wrong"
         });
       });
@@ -84,28 +84,32 @@ module.exports.show = (req, res, next) => {
   });
 };
 
-// module.exports.edit = (req, res, next) => {
-//   Product.findById(req.params.id).then((product) => {
-//     res.render('products/form', {
-//       product: product
-//     });
-//   });
-// };
-//
+module.exports.edit = (req, res, next) => {
+  Restaurant.findById(req.params.id).then((restaurant) => {
+    res.render('restaurants/new', {
+      restaurant: restaurant
+    }).catch(err => {
+      console.log(err)
+      res.render("restaurants/new", {
+        error: "Something went wrong"
+      });
+    });
+  });
+};
+
 // module.exports.update = (req, res, next) => {
-//   const productId = req.params.id;
+//   const restaurantId = req.params.id;
 //   const updates = {
 //       name: req.body.name,
-//       price: req.body.price,
 //       imageUrl: req.body.imageUrl,
 //       description: req.body.description
 //   };
 //
-//   Product.findByIdAndUpdate(productId, updates).then((product) => {
-//     res.redirect('/products');
+//   Restaurant.findByIdAndUpdate(restaurantId, updates).then((restaurant) => {
+//     res.redirect('/index');
 //   });
 // };
-//
+
 
 module.exports.delete = (req, res) => {
   Restaurant.remove({

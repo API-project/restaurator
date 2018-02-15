@@ -30,18 +30,13 @@
             <input type="submit" value="Delete" class="Delete">
           </form>
         </td>
+        <td>
+          <form action="/restaurants/<%= restaurant._id %>/edit" method="post">
+            <input type="submit" value="Edit" class="Edit">
+          </form>
+        </td>
       </tr>
-      <script type="text/javascript">
-        setTimeout(function() {
-          new google.maps.Marker({
-            position: {
-              lat: <%= restaurant.location.coordinates[0] %>,
-              lng: <%= restaurant.location.coordinates[1] %>
-            },
-            map: map
-          });
-        }, 2000)
-      </script>
+
     <% }) %>
   </tbody>
 </table>
