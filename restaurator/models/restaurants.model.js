@@ -9,21 +9,27 @@ const RestaurantSchema = new mongoose.Schema({
      name: {
          type: String,
          required: [true, 'Name is required'],
-         unique: true,
+         //unique: true,
      },
      email: {
          type: mongoose.SchemaTypes.Email,
-         required: [true, 'Email is required'],
+         //required: [true, 'Email is required'],
      },
      password: {
          type: String,
-         required: [true, 'User needs a password']
+         //required: [true, 'User needs a password']
      },
      category: {
          type: String,
      },
      description: {
          type: String,
+     },
+     direction: {
+         type: String,
+     },
+     rating: {
+         type: Number,
      },
      location: {
         type: { type: String },
