@@ -25,19 +25,28 @@ var perrachica = {
 
 
 var locations = [
-[perrachica.info, perrachica.lat, perrachica.long, 0],
+[perrachica.name, perrachica.lat, perrachica.long, 0],
 [mamacampo.info, mamacampo.lat, mamacampo.long, 1],
 [bacira.info, bacira.lat, bacira.long, 2],
 ];
 
   function initMap() {
-    var chamberi = {lat: 40.43623, lng: -3.721604};
+    var chamberi = {lat: 40.434137, lng: -3.703253};
 
     var map = new google.maps.Map(document.getElementById('map'), {
       center: new google.maps.LatLng(40.4337911, -3.7012627),
       zoom: 15,
+      // styles: [{
+      //   stylers: [{ visibility: 'simplified' }]
+      // }, {
+      //   elementType: 'labels',
+      //   stylers: [{ visibility: 'off' }]
+      // }],
       mapTypeId: google.maps.MapTypeId.ROADMAP
     });
+
+
+
 
     var infowindow = new google.maps.InfoWindow();
 
@@ -48,13 +57,36 @@ var locations = [
               type: ['meal_delivery']
             }, callback);
 
-            var marker, i;
+             var marker, i;
 
-          for (i = 0; i < locations.length; i++) {
-          marker = new google.maps.Marker({
-          position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-          map: map
-          });
+             function callback(results, status) {
+               if (status !== google.maps.places.PlacesServiceStatus.OK) {
+                 console.error(status);
+                 return;
+               }
+               for (var i = 0, result; result = results[i]; i++) {
+                 addMarker(result);
+               }
+             }
+
+             function addMarker(place) {
+               var marker = new google.maps.Marker({
+                 map: map,
+                 position: place.geometry.location,
+                 icon: {
+                   url: 'https://slack-imgs.com/?c=1&url=https%3A%2F%2Fchat.whatsapp.com%2Finvite%2Ficon%2FFz9hpzUemIu3CieLHoc8N0',
+                   anchor: new google.maps.Point(10, 10),
+                   scaledSize: new google.maps.Size(40, 47)
+                 }
+               });
+             }
+
+
+          // for (i = 0; i < locations.length; i++) {
+          // marker = new google.maps.Marker({
+          // position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+          // map: map
+          // });
 
           google.maps.event.addListener(marker, 'click', (function (marker, i) {
           return function () {
@@ -62,7 +94,7 @@ var locations = [
           infowindow.open(map, marker);
           }
           })(marker, i));
-          }
+          //}
     // service.getDetails({placeId: 'ChIJZ3Wh-V8oQg0RwVByFBg-6xM'}, callback);
 
   }
@@ -89,8 +121,16 @@ var locations = [
 
     }
 
-    function createMarker(place) {
-       console.log(place);
+    function createMarker() {
+      var marker, i;
+
+    for (i = 0; i < results.length; i++) {
+    marker = new google.maps.Marker({
+    position: new google.maps.LatLng(results[i][1], results[i][2]),
+    map: map
+    });
+
+      // console.log(place);
       // place = new Place();
       // place.setId(place.place_id);
       // place.setName(place.name);
@@ -103,4 +143,4 @@ var locations = [
 
 
 
-// }
+ }

@@ -23,6 +23,7 @@ module.exports.run = () => {
         // console.log("------------------- FIN GOOGLE -------------------");
 
           console.log(response.json.results[0].name);
+          console.log(`${JSON.stringify(response.json.results[0])}`);
 
         Restaurant.count({ name: response.json.results.name })
           .then(result => {
@@ -36,10 +37,13 @@ module.exports.run = () => {
                                 name: googleResponse.name,
                                 rating: googleResponse.rating,
                                 direction: googleResponse.vicinity,
+                                imageUrl: JSON.stringify(googleResponse.photos),
+                                location: googleResponse.geometry.location,
                               });
                               newRestaurant.save()
                                 .then(result => {
                                   console.log(`This is the ${result.name} restaurant.`);
+                                  console.log(`${JSON.stringify(googleResponse.geometry.location)}`);
                                 })
                                 .catch(err => {
                                   console.log(err)

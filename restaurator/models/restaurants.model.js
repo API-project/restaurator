@@ -35,19 +35,17 @@ const RestaurantSchema = new mongoose.Schema({
        open_now: {type: Boolean,}
      },
      location: {
-         type: { type: String },
-         coordinates: [Number]
-       },
-     // location: {
-     //    type: { type: String },
-     //    coordinates: {
-     //      latitude: { type: Number },
-     //      longitude: { type: Number }
-     //    }
-     //  },
+          lat: {type: Number},
+          lng: {type: Number}
+      },
      imageUrl: {
-         type: String,
+          type: String,
      },
+     // imageUrl: {
+     //   photoreference:	{type: String},
+     //   maxwidth:  {type: Number},
+     //   maxheight:	{type: Number}
+     // },
      file: String,
 
  }, { timestamps: true });
