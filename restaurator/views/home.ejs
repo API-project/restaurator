@@ -1,12 +1,57 @@
   <div id="map"></div>
+  <div class="row">
+              <div class="col s12 m7">
+            <div class="card">
+              <div class="card-image">
+                <img src="http://abaceriadelsurblog.es/wp-content/uploads/2014/12/restaurantes.jpg">
+                <span class="card-title">Restaurante 1</span>
+              </div>
+              <div class="card-content">
+                <p>Texto</p>
+              </div>
+              <div class="card-action">
+                <a href="#">Pedir</a>
+              </div>
+            </div>
+          </div>
+        </div>
 
-    <% restaurants.forEach((restaurant) => { %>
-        <p><%= restaurant.rating %> <%= restaurant.name %> <%= restaurant.direction %></p>
-        <p></p>
+        <div class="row">
+          <div class="col s12 m7">
+            <div class="card">
+              <div class="card-image">
+                <img src="http://abaceriadelsurblog.es/wp-content/uploads/2014/12/restaurantes.jpg">
+                <span class="card-title">Restaurante 2</span>
+              </div>
+              <div class="card-content">
+                <p>Texto</p>
+                </div>
+                <div class="card-action">
+                  <a href="#">Pedir</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col s12 m7">
+              <div class="card">
+                <div class="card-image">
+                  <img src="http://abaceriadelsurblog.es/wp-content/uploads/2014/12/restaurantes.jpg">
+                  <span class="card-title">Restaurante 3</span>
+                </div>
+                <div class="card-content">
+                  <p><% restaurants.forEach((restaurant) => { %>
+                          <p><%= restaurant.rating %> <%= restaurant.name %> <%= restaurant.direction %></p>
+                          <p></p>
 
 
-    <% }) %>
-
-<p>
-    <%- include auth/login.ejs %>
-</p>
+                      <% }) %>
+                 </p>
+                </div>
+                  <div class="card-action">
+                    <a href="#">Pedir</a>
+                  </div>
+                </div>
+              </div>
+            </div>
