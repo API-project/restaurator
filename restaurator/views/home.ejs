@@ -41,13 +41,10 @@
                   <span class="card-title">Restaurante 3</span>
                 </div>
                 <div class="card-content">
-                  <p><% restaurants.forEach((restaurant) => { %>
-                          <p><%= restaurant.rating %> <%= restaurant.name %> <%= restaurant.direction %></p>
-                          <p></p>
-
-
-                      <% }) %>
-                 </p>
+                  <% var index = Math.floor(Math.random() * restaurants.length); %>
+                  <p><%= restaurants[index].rating %> <%= restaurants[index].name %> <%= restaurants[index].direction %></p>
+                  <p></p>
+                </p>
                 </div>
                   <div class="card-action">
                     <a href="#">Pedir</a>
