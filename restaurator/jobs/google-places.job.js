@@ -18,17 +18,32 @@ module.exports.run = () => {
 
       }).asPromise()
       .then(function(response) {
+        Restaurant.findOne({name: 'El bar de pepito'})
+          .then(result => {
+            if (!result) {
+              // El restaurante no existe
+            } else {
+              // El restaurante existe
+            }
+            console.log('El restaurante existe')
+            console.log(result)
+          })
+          .catch(err => {
+            console.log('Ha ocurrido un error')
+            console.log(err)
+          })
         for (i = 0; i < response.json.results.length; i++) {
           if (response.json.results.name !== null) {
             console.log(`el restaurante ${response.json.results[i].name} ya existe`);
           } else {
+            const googleResponse = response.json.results[i];
             const newRestaurant = new Restaurant({
-              name: response.json.results[i].name,
+              name: googleResponse.name,
               //imageUrl: response.body.imageUrl,
               //location: response.json.results.geometry.location,
               //hours: response.json.results[0].opening_hours.open_now,
-              rating: response.json.results[i].rating,
-              direction: response.json.results[i].vicinity,
+              rating: googleResponse.rating,
+              direction: googleResponse.vicinity,
             });
 
             // console.log(response.json.results[0].geometry.location);
