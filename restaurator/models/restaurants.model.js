@@ -31,13 +31,20 @@ const RestaurantSchema = new mongoose.Schema({
      rating: {
          type: Number,
      },
+     opening_hours: {
+       open_now: {type: Boolean,}
+     },
      location: {
-        type: { type: String },
-        coordinates: {
-          latitude: { type: Number },
-          longitude: { type: Number }
-        }
-      },
+         type: { type: String },
+         coordinates: [Number]
+       },
+     // location: {
+     //    type: { type: String },
+     //    coordinates: {
+     //      latitude: { type: Number },
+     //      longitude: { type: Number }
+     //    }
+     //  },
      imageUrl: {
          type: String,
      },
