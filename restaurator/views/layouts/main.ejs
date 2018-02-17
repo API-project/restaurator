@@ -3,8 +3,12 @@
 <head>
   <title>Restaurator</title>
   <!-- Bootstrap -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+  <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+<!--Import materialize-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
   <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
   <script type="text/javascript" src="/javascripts/application-home.js"></script>
 
@@ -12,30 +16,40 @@
     <!-- Google Maps -->
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCscTbTrX-GiGtgj9E2v6ZmKUoz5xv7b4w&libraries=places&callback=initMap" async defer></script>
 
-  <nav class="navbar navbar-default" role="navigation">
+  <!-- <nav class="navbar navbar-default" role="navigation">
       <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
           </button>
-      </div>
-      <div class="navbar-collapse collapse">
+      </div> -->
+      <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Restaurator</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="http://localhost:3000/signup">SignUp</a></li>
+        <li><a href="http://localhost:3000/login">Login</a></li>
+        <li><a href="http://localhost:3000/restaurants/new">Register</a></li>
+      </ul>
+    </div>
+  </nav>
+      <!-- <div class="navbar">
           <ul class="nav navbar-nav navbar-left">
-              <li><a href="#">SignUp</a></li>
+              <li><a href="http://localhost:3000/signup" class="waves-effect waves-light btn">SignUp</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-center">
-              <li><a href="#">Login</a></li>
-    
+              <li><a href="http://localhost:3000/login" class="waves-effect waves-light btn">Login</a></li>
+
           </ul>
           <ul class="nav navbar-nav navbar-right">
-              <li><a href="#">RegisterRestaurant</a></li>
-          </ul>
+              <li><a href="http://localhost:3000/restaurants/new" class="waves-effect waves-light btn">RegisterRestaurant</a></li>
+          </ul> -->
       </div>
 
 </head>
 <body>
-  <h1>Restaurator</h1>
+  <!-- <h1>Restaurator</h1> -->
 <section class="container">
 
     <article>

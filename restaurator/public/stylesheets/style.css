@@ -25,3 +25,8 @@ a {
 article {
   padding:  20px;
 }
+
+.card {
+  display: block;
+
+}
