@@ -17,59 +17,133 @@ module.exports.run = () => {
         type: 'meal_delivery'
 
       }).asPromise()
-      .then(function(response) {
-         Restaurant.findOne({name: 'El bar de pepito'})
+          .then(function(response) {
+        // console.log("------------------- GOOGLE -------------------");
+        // console.log(`${JSON.stringify(response.json.results)}`);
+        // console.log("------------------- FIN GOOGLE -------------------");
+
+          console.log(response.json.results[0].name);
+          console.log(`${JSON.stringify(response.json.results[0])}`);
+
+        Restaurant.count({ name: response.json.results.name })
           .then(result => {
-            if (!result) {
-              // El restaurante no existe
-            } else {
-              // El restaurante existe
-            }
-            console.log('El restaurante existe')
-            console.log(result)
+              console.log(result);
+              if (result !== 0) {
+              console.log("ya exitía");
+                } else {
+                  for (i = 0; i < response.json.results.length; i++) {
+                              const googleResponse = response.json.results[i];
+                              const newRestaurant = new Restaurant({
+                                name: googleResponse.name,
+                                rating: googleResponse.rating,
+                                direction: googleResponse.vicinity,
+                                imageUrl: JSON.stringify(googleResponse.photos),
+                                location: googleResponse.geometry.location,
+                              });
+                              newRestaurant.save()
+                                .then(result => {
+                                  console.log(`This is the ${result.name} restaurant.`);
+                                  console.log(`${JSON.stringify(googleResponse.geometry.location)}`);
+                                })
+                                .catch(err => {
+                                  console.log(err)
+                                  error: "Something went wrong"
+                                });
+                          }
+                }
+            }).catch(err => {
+                  console.log("algo fue mal en el catch");
+            });
+
+
+
+
+
+        // for (var i = 0; i < response.json.results.length; i++) {
+        // Restaurant.count({name: response.json.results[i].name})
+        //   .then(result => {
+        //     if (!result) {
+        //       const googleResponse = response.json.results[i];
+        //                const newRestaurant = new Restaurant({
+        //                  name: googleResponse.name,
+        //       //           //imageUrl: googleResponse.imageUrl,
+        //       //           //location: googleResponse.location,
+        //                  opening_hours: googleResponse.opening_hours.open_now,
+        //                  rating: googleResponse.rating,
+        //                  direction: googleResponse.vicinity,
+        //                })
+        //                console.log('Restaurante guardado correctamente');
+        //                console.log(newRestaurant);
+        //                         newRestaurant.save()
+        //                           .then(result => {
+        //                             console.log(`This is the ${result.name} restaurant.`);
+        //                //             //res.redirect("restaurants/index");
+        //                           })
+        //                           .catch(err => {
+        //                             console.log(err)
+        //                //             //res.render("restaurants/new", {
+        //                             error: "Something went wrong"
+        //                           });
+        //                       //  });
+        //                      //};
+        //     } else {
+        //       console.log("------------------- Restaurant -------------------");
+        //       console.log(`${result}`);
+        //       console.log(response.json.results[0].opening_hours.open_now);
+        //       console.log(response.json.results[0].photos);
+        //       console.log(response.json.results[0].geometry.location);
+        //       console.log("------------------- Restaurant YA ESTABA -------------------");
+        //
+        //     }
+
+
+
           })
           .catch(err => {
             console.log('Ha ocurrido un error')
             console.log(err)
           })
-        for (i = 0; i < response.json.results.length; i++) {
-          if (response.json.results.name !== null) {
-            console.log(`el restaurante ${response.json.results[i].name} ya existe`);
-          } else {
-            const googleResponse = response.json.results[i];
-            const newRestaurant = new Restaurant({
-              name: googleResponse.name,
-              //imageUrl: response.body.imageUrl,
-              //location: response.json.results.geometry.location,
-              //hours: response.json.results[0].opening_hours.open_now,
-              rating: googleResponse.rating,
-              direction: googleResponse.vicinity,
-            });
-
-            // console.log(response.json.results[0].geometry.location);
-            // console.log(response.json.results[0].name);
-            // console.log(response.json.results[0].opening_hours.open_now);
-            // console.log(response.json.results[0].rating);
-            // console.log(response.json.results[0].vicinity);
-            //console.log('Restaurante guardado correctamente')
-            //console.log(newRestaurant)
-            newRestaurant.save()
-              .then(result => {
-                console.log(`This is the ${result.name} restaurant.`);
-                //res.redirect("restaurants/index");
-              })
-              .catch(err => {
-                console.log(err)
-                //res.render("restaurants/new", {
-                error: "Something went wrong"
-              });
-            //});
-          };
         }
-      })
-      .catch(err => {
-        console.log(err)
-        //res.render("restaurants/new", {
-        error: "Something went wrong"
-      });
-    }
+    //  })
+    //     for (i = 0; i < response.json.results.length; i++) {
+    //       //console.log(response.json.results[0].location);
+    //       if (response.json.results.name !== null) {
+    //         console.log(`el restaurante ${response.json.results[i].name} ya existe`);
+    //       } else {
+    //         const googleResponse = response.json.results[i];
+    //         const newRestaurant = new Restaurant({
+    //           name: googleResponse.name,
+    //           //imageUrl: googleResponse.imageUrl,
+    //           //location: googleResponse.location,
+    //           opening_hours: googleResponse.opening_hours.open_now,
+    //           rating: googleResponse.rating,
+    //           direction: googleResponse.vicinity,
+    //         });
+    //
+    //         // console.log(response.json.results[0].geometry.location);
+    //         // console.log(response.json.results[0].name);
+    //         // console.log(response.json.results[0].opening_hours.open_now);
+    //         // console.log(response.json.results[0].rating);
+    //         // console.log(response.json.results[0].vicinity);
+    //         //console.log('Restaurante guardado correctamente')
+    //         //console.log(newRestaurant)
+    //         newRestaurant.save()
+    //           .then(result => {
+    //             console.log(`This is the ${result.name} restaurant.`);
+    //             //res.redirect("restaurants/index");
+    //           })
+    //           .catch(err => {
+    //             console.log(err)
+    //             //res.render("restaurants/new", {
+    //             error: "Something went wrong"
+    //           });
+    //         //});
+    //       };
+    //     }
+    //   })
+    //   .catch(err => {
+    //     console.log(err)
+    //     //res.render("restaurants/new", {
+    //     error: "Something went wrong"
+    //   });
+    // }
