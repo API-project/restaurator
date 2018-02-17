@@ -30,20 +30,28 @@ module.exports.run = () => {
               if (result !== 0) {
               console.log("ya exitía");
                 } else {
-                  const googleResponse = response.json.results[0];
-                  const newRestaurant = new Restaurant({
-                    name: googleResponse.name,
-                    opening_hours: googleResponse.opening_hours.open_now,
-                    rating: googleResponse.rating,
-                    direction: googleResponse.vicinity
-                  })
-                  console.log('Restaurante guardado correctamente');
-                  newRestaurant.save()
-                  console.log(newRestaurant);
+                  for (i = 0; i < response.json.results.length; i++) {
+                              const googleResponse = response.json.results[i];
+                              const newRestaurant = new Restaurant({
+                                name: googleResponse.name,
+                                rating: googleResponse.rating,
+                                direction: googleResponse.vicinity,
+                              });
+                              newRestaurant.save()
+                                .then(result => {
+                                  console.log(`This is the ${result.name} restaurant.`);
+                                })
+                                .catch(err => {
+                                  console.log(err)
+                                  error: "Something went wrong"
+                                });
+                          }
                 }
             }).catch(err => {
                   console.log("algo fue mal en el catch");
             });
+
+
 
 
 
