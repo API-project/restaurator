@@ -18,7 +18,7 @@ module.exports.run = () => {
 
       }).asPromise()
       .then(function(response) {
-        Restaurant.findOne({name: 'El bar de pepito'})
+         Restaurant.findOne({name: 'El bar de pepito'})
           .then(result => {
             if (!result) {
               // El restaurante no existe
