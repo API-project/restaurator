@@ -13,7 +13,7 @@ module.exports.run = () => {
     };
     googleMapsClient.placesNearby({
         location: chamberi,
-        radius: 1000,
+        radius: 2000,
         type: 'meal_delivery'
 
       }).asPromise()
@@ -39,6 +39,7 @@ module.exports.run = () => {
                                 direction: googleResponse.vicinity,
                                 imageUrl: JSON.stringify(googleResponse.photos),
                                 location: googleResponse.geometry.location,
+                                place_id: googleResponse.geometry.place_id,
                               });
                               newRestaurant.save()
                                 .then(result => {

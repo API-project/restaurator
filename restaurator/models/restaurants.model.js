@@ -11,6 +11,9 @@ const RestaurantSchema = new mongoose.Schema({
          required: [true, 'Name is required'],
          //unique: true,
      },
+     place_id: {
+         type: String
+     },
      email: {
          type: mongoose.SchemaTypes.Email,
          //required: [true, 'Email is required'],

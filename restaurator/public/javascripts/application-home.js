@@ -74,7 +74,7 @@ var locations = [
                  map: map,
                  position: place.geometry.location,
                  icon: {
-                   url: 'https://slack-imgs.com/?c=1&url=https%3A%2F%2Fchat.whatsapp.com%2Finvite%2Ficon%2FFz9hpzUemIu3CieLHoc8N0',
+                   url: 'https://cdn.onlinewebfonts.com/svg/img_19509.png',
                    anchor: new google.maps.Point(10, 10),
                    scaledSize: new google.maps.Size(40, 47)
                  }

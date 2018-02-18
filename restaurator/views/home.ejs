@@ -1,55 +1,24 @@
   <div id="map"></div>
   <div class="row">
               <div class="col s12 m7">
+      <p>  <% restaurants.forEach((restaurant) => { %>
             <div class="card">
               <div class="card-image">
                 <img src="http://abaceriadelsurblog.es/wp-content/uploads/2014/12/restaurantes.jpg">
-                <span class="card-title">Restaurante 1</span>
+                <span class="card-title"><p><%= restaurant.name %></p></span>
               </div>
               <div class="card-content">
-                <p>Texto</p>
+          <p><span>Rating: </span><%= restaurant.rating %></p>
+          <p><%= restaurant.direction %></p>
+          <p><%= restaurant.category %></p>
               </div>
               <div class="card-action">
                 <a href="#">Pedir</a>
               </div>
             </div>
+            </p>
+            <% }) %>
           </div>
         </div>
 
-        <div class="row">
-          <div class="col s12 m7">
-            <div class="card">
-              <div class="card-image">
-                <img src="http://abaceriadelsurblog.es/wp-content/uploads/2014/12/restaurantes.jpg">
-                <span class="card-title">Restaurante 2</span>
-              </div>
-              <div class="card-content">
-                <p>Texto</p>
-                </div>
-                <div class="card-action">
-                  <a href="#">Pedir</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col s12 m7">
-              <div class="card">
-                <div class="card-image">
-                  <img src="http://abaceriadelsurblog.es/wp-content/uploads/2014/12/restaurantes.jpg">
-                  <span class="card-title">Restaurante 3</span>
-                </div>
-                <div class="card-content">
-                  <div class="card-content">
-                    <% var index = Math.floor(Math.random() * restaurants.length); %>
-                    <p><%= restaurants[index].rating %> <%= restaurants[index].name %> <%= restaurants[index].direction %></p>
-                    <p></p>
-                 </p>
-                </div>
-                  <div class="card-action">
-                    <a href="#">Pedir</a>
-                  </div>
-                </div>
-              </div>
-            </div>
+      
