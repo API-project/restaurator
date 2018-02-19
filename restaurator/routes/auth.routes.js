@@ -13,4 +13,7 @@ router.post('/login', secure.nonAuthenticated, authController.doLogin);
 
 router.get('/logout', secure.isAuthenticated, authController.logout);
 
+router.delete('/profile/:username', secure.isAuthenticated, authController.delete);
+//router.put(update)
+
 module.exports = router;

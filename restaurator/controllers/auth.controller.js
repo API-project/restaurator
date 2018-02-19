@@ -83,6 +83,16 @@ module.exports.doSignup = (req, res, next) => {
       }
     }
 
+    module.exports.delete = (req, res, next) => {
+      const username = req.params.username;
+      if(req.user.role == 'admin'){
+        User.remove({ username: username }, (error) => {
+          console.error(error);
+        });
+      } else {
+        console.error('User is not admin');
+      }
+    }
 
 module.exports.logout = (req, res, next) => {
   req.logout();
