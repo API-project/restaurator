@@ -112,11 +112,18 @@ module.exports.edit = (req, res, next) => {
 
 
 module.exports.delete = (req, res) => {
+if(req.user.role == 'admin'){
+
+
   Restaurant.remove({
     _id: req.params.id
   }).then(() => {
     res.redirect("restaurant/index");
   });
+  }
+  else {
+    console.error('User is not admin');
+  }
 };
 
 module.exports.pic = (req, res) => {
