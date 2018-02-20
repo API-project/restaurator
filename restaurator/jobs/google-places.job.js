@@ -13,7 +13,7 @@ module.exports.run = () => {
     };
     googleMapsClient.placesNearby({
         location: chamberi,
-        radius: 2000,
+        radius: 3000,
         type: 'meal_delivery'
 
       }).asPromise()
