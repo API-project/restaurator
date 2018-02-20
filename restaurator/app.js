@@ -24,6 +24,7 @@ require('./configs/scheduler.config');
 const home = require('./routes/home.routes');
 const restaurants = require('./routes/restaurants.routes');
 const auth = require ('./routes/auth.routes');
+const result = require ('./routes/result.routes');
 
 const app = express();
 
@@ -38,6 +39,7 @@ app.set('layout','layouts/main');
 // app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
@@ -59,9 +61,11 @@ app.use((req, res, next) => {
 })
 
 
+
 app.use('/', home);
 app.use('/', auth);
 app.use('/restaurants', restaurants);
+app.use('/', result);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

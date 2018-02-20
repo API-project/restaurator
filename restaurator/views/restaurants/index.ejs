@@ -1,4 +1,9 @@
-<div id="map"></div>
+
+
+
+
+    <div id="map"></div>
+
 
 <% if(restaurants.length > 0) { %>
 <table class="table table-striped table-hover">
@@ -7,7 +12,7 @@
       <th></th>
       <th>Category</th>
       <th>Name</th>
-      <th>Description</th>
+      <th>Rating</th>
       <th>Lat</th>
       <th>Lng</th>
       <th>Image</th>
@@ -17,12 +22,10 @@
   <tbody>
     <% restaurants.forEach((restaurant) => { %>
       <tr>
-
-        <td><%= restaurant.category %></td>
         <td><%= restaurant.name %></td>
-        <td><%= restaurant.description %></td>
-        <td><%= restaurant.location.coordinates[0] %></td>
-        <td><%= restaurant.location.coordinates[1] %></td>
+        <td><%= restaurant.rating %></td>
+        <td><%= restaurant.category %></td>
+
         <td>
           <img src="/restaurants/<%= restaurant._id %>/pic">
         </td>
