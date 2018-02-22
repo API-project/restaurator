@@ -8,7 +8,7 @@ const RestaurantSchema = new mongoose.Schema({
 
      name: {
          type: String,
-         required: [true, 'Name is required'],
+         //required: [true, 'Name is required'],
          //unique: true,
      },
      place_id: {
