@@ -198,7 +198,7 @@ function search() {
 
       }
       //transfromToObject(results);
-      console.log(saveIntoArray(results));
+      // console.log(saveIntoArray(results));
 
 
       // function transfromToObject(results){
@@ -239,7 +239,7 @@ function search() {
          data: JSON.stringify(saveIntoArray(results)),
          contentType: 'application/json',
         success: function(response) {
-          console.log(response);
+          // console.log(response);
         },
         error: function(err) {
           console.log(err);

@@ -5,3 +5,26 @@
 <% if (flash.welcome) {%>
     <p><strong> <%= flash.welcome %> </strong></p>
 <% } %>
+
+<div class="row">
+            <div class="col s12 m7">
+    <p>  <% restaurants.forEach((restaurant) => { %>
+          <div class="card">
+            <div class="card-image">
+              <img src="http://abaceriadelsurblog.es/wp-content/uploads/2014/12/restaurantes.jpg">
+              <span class="card-title"><p><%= restaurant.name %></p></span>
+            </div>
+            <div class="card-content">
+        <p><span>Rating: </span><%= restaurant.rating %></p>
+        <p><%= restaurant.direction %></p>
+        <p><%= restaurant.category %></p>
+            </div>
+            <div class="card-action">
+              <a href="/restaurants/like/<%=restaurant._id%>">Me gusta</a>
+              <a href="#">Pedir</a>
+            </div>
+          </div>
+          </p>
+          <% }) %>
+        </div>
+      </div>
