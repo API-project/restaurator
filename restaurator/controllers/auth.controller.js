@@ -42,7 +42,7 @@ module.exports.doSignup = (req, res, next) => {
               error: "Something went wrong"
             });
           } else {
-            res.redirect("auth/profile");
+            res.redirect('/login');
           }
         });
       })
@@ -75,7 +75,7 @@ module.exports.doSignup = (req, res, next) => {
                 next(error);
               } else {
                 req.flash('welcome', 'Welcome back');
-                res.redirect('auth/profile');
+                res.render('auth/profile');
               }
             });
           }

@@ -43,14 +43,14 @@ article {
       }
 
       #listing {
-        position: absolute;
-        width: 200px;
-        height: 470px;
+        /* position: absolute; */
+        /* width: 200px; */
+        /* height: 470px; */
         overflow: auto;
-        left: 442px;
-        top: 0px;
+        /* left: 442px; */
+        /* top: 0px; */
         cursor: pointer;
-        overflow-x: hidden;
+        /* overflow-x: hidden; */
       }
       #findhotels {
         position: absolute;
