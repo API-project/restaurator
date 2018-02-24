@@ -1,69 +1,67 @@
 const Restaurant = require('../models/restaurants.model');
 const ElTenedor = require('../models/eltenedor.model');
 
-//const DatasetExCompany = require('../lib/11870.fakeapi');
+const JustEat = require('../models/justeat.model');
 
-module.exports.result = (req, res) => {
-  const {
-    name,
-    rating,
-    direction,
-    imageUrl,
-    location,
-    place_id,
-    category
-  } = req.body;
-  // console.log(req.body[0].name);
-  // console.log(req.body[0].rating);
-  // console.log(req.body[0].direction);
-  // console.log(req.body[0].imageUrl);
-  // console.log(req.body[0].location);
-  // console.log(req.body[0].place_id);
+const async = require('async');
 
-  Restaurant.findOne({
-      place_id: req.body.place_id
+
+module.exports.result = (req, res, next) => {
+  const restaurantsArray = req.body;
+
+  async.eachSeries(restaurantsArray, function filterId (restaurant, done) {
+    Restaurant.findOne({
+        place_id: restaurant.place_id
     })
-    .then(restaurant => {
-        if (restaurant !== null) {
-          console.log(`the restaurant ${req.body[0].name} already exists`);
+      .then(foundRestaurant => {
+        if (foundRestaurant) {
+          console.log('It already exists');
         } else {
-          for (i = 0; i < req.body.length; i++) {
-            const newRestaurant = new Restaurant({
-              name: req.body[i].name,
-              rating: req.body[i].rating,
-              direction: req.body[i].direction,
-              imageUrl: req.body[i].imageUrl,
-              location: req.body[i].location,
-              place_id: req.body[i].place_id,
-            });
-            console.log(newRestaurant);
-            ElTenedor.findOne({"name": "Telepizza"}).then(resultsRest => {
-              console.log("Res -> El tenedor ", resultsRest);
-              if (newRestaurant.name === resultsRest.name) {
-                newRestaurant.category = resultsRest.categories;
-                console.log(`the categories are ${newRestaurant.category}`)
-              } else {
-                console.log("No he encontrado el restaurante ", newRestaurant.name);
-              }
-            }).catch(err => {})
-      // ElTenedor.findOne({name: newRestaurant.name}).then((result) => {
-      // })
-      // .catch(err => {
-      //   console.log(err) {
-      //     error: "Something went wrong"
-      //   }
-      // });
-
-            newRestaurant.save()
-              .then(result => {
-                console.log(`Restaurante ${req.body.name} guardado correctamente`)
-                res.redirect("restaurants/index");
-              })
-              .catch(err => {});
+          const imageUrl =
+          restaurant.imageUrl && restaurant.imageUrl[0].html_attributions[0]
+            ? restaurant.imageUrl[0].html_attributions[0]
+            : '';
+          const location = {
+            lat: restaurant.location.location.lat,
+            lng: restaurant.location.location.lng,
           }
+          // Used for querying ElTenedor & JustEat.
+          const geo_location = {
+            lat: location.lat.toFixed(7),
+            lon: location.lng.toFixed(7)
+          };
+          ElTenedor.findOne({geo_location})
+            .then(eltenedor => {
+              geo_location['lon'] = geo_location.lon.slice(0, geo_location.lon.length - 1);
+              JustEat.findOne({geo_location})
+                .then(justeat => {
+                  const categories = eltenedor ? eltenedor.categories : [];
+                  const href = justeat ? justeat.href : '';
+                  const newRestaurant = new Restaurant({
+                     name: restaurant.name,
+                     rating: restaurant.rating,
+                     direction: restaurant.direction,
+                     imageUrl,
+                     location,
+                     place_id: restaurant.place_id,
+                     categories,
+                     href,
+                   });
+                  newRestaurant.save()
+                    .then(() => {
+                      console.log(`${newRestaurant.name} creado`);
+                    })
+                    .catch(err => {next(err)})
+                })
+                .catch(err => {next(err)})
+            })
+            .catch(err => {next(err)})
         }
-      }).catch(err => {
-        console.log(err)
-      });
+      })
+      .catch(err => {next(err)})
+      done();
+  }, function allDone (err) {
+    console.log('done');
+  });
+};
 
-    };

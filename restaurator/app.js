@@ -25,6 +25,7 @@ const home = require('./routes/home.routes');
 const restaurants = require('./routes/restaurants.routes');
 const auth = require ('./routes/auth.routes');
 const result = require ('./routes/result.routes');
+const profile = require ('./routes/profile.routes');
 
 const app = express();
 
@@ -66,6 +67,7 @@ app.use('/', home);
 app.use('/', auth);
 app.use('/restaurants', restaurants);
 app.use('/', result);
+app.use('/', profile);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
