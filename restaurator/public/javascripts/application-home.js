@@ -1,4 +1,4 @@
-var map, places, infoWindow;
+var map, places, infoWindow, xx;
 var markers = [];
 var autocomplete;
 var countryRestrict = {
@@ -6,6 +6,23 @@ var countryRestrict = {
 };
 var MARKER_PATH = 'https://developers.google.com/maps/documentation/javascript/images/marker_green';
 var hostnameRegexp = new RegExp('^https?://.+?/');
+
+class googleData {
+  constructor(name,rating,direction,location,place_id,imageUrl) {
+    this.name = name;
+    this.rating = rating;
+    this.direction = vicinity;
+    this.location = location;
+    this.place_id = place_id;
+    this.imageUrl = photos;
+  }
+  checkGoogleData() {
+    console.log(`Hello! It's ${this.name} (${this.rating})`);
+  }
+}
+
+// let googleData = new GoogleData();
+
 
 var countries = {
   'Chm': {
@@ -180,12 +197,47 @@ function search() {
         //console.log(results[i]);
 
       }
-    const loquequiero = JSON.stringify(results);
+      //transfromToObject(results);
+      console.log(saveIntoArray(results));
+
+
+      // function transfromToObject(results){
+      //   for(i=0; i<results.length; i++) {
+      //     console.log(results[i].name);
+      //     console.log(results[i].rating);
+      //     console.log(results[i].vicinity);
+      //     console.log(results[i].place_id);
+      //     console.log(results[i].photos);
+      //     console.log(results[i].geometry.location);
+      //   }
+      // }
+
+       function saveIntoArray(results) {
+       var xx = [];
+
+       for (var i = 0; i < results.length; i++) {
+         var data = {"name":"","rating":"","direction":"","place_id":"","imageUrl":"","location":""};
+        // console.log(data);
+        data.name = results[i].name;
+        data.rating = results[i].rating;
+        data.direction = results[i].vicinity;
+        data.place_id = results[i].place_id;
+        data.imageUrl = results[i].photos;
+        data.location = results[i].geometry;
+
+        xx.push(data);
+
+
+    }
+    return xx;
+  };
+
+
     //  console.log(results[0]);
       jQuery.post({
         url: "/result",
-        data: loquequiero,
-      
+         data: JSON.stringify(saveIntoArray(results)),
+         contentType: 'application/json',
         success: function(response) {
           console.log(response);
         },

@@ -4,7 +4,7 @@ const bcryptSalt = 10;
 const path = require('path');
 
 module.exports.index = (req, res) => {
-  Restaurant.find({}).then((restaurants) => {
+  Restaurant.find({}).sort( { rating: -1 } ).then((restaurants) => {
     res.render("restaurants/index", {
       restaurants: restaurants
     });
@@ -76,13 +76,13 @@ module.exports.create = (req, res) => {
   })
 };
 
-module.exports.show = (req, res, next) => {
-  Restaurant.findById(req.params.id).then((restaurant) => {
-    res.render('restaurants/index', {
-      restaurant: restaurant
-    });
-  });
-};
+// module.exports.show = (req, res, next) => {
+//   Restaurant.find({}).sort( { rating: -1 } ).then((restaurants) => {
+//     res.render("restaurants/index", {
+//       restaurants: restaurants
+//     });
+//   });
+// };
 
 module.exports.edit = (req, res, next) => {
   Restaurant.findById(req.params.id).then((restaurant) => {
