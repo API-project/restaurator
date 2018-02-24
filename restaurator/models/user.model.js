@@ -23,17 +23,18 @@ const userSchema = new mongoose.Schema({
          type: String,
          required: [true, 'User needs a password']
      },
-
      imageUrl: {
          type: String,
-
      },
-
      role: {
          type: String,
          enum: ['user', 'admin'],
          default: 'user'
      },
+     favourite: [{
+       type: mongoose.Schema.ObjectId,
+       ref: 'Restaurant'
+     }],
  }, { timestamps: true });
 
 userSchema.methods.checkPassword = function (password) {

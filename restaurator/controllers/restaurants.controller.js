@@ -1,7 +1,9 @@
 const Restaurant = require('../models/restaurants.model');
+const User = require('../models/user.model')
 const bcrypt = require('bcryptjs');
 const bcryptSalt = 10;
 const path = require('path');
+
 
 module.exports.index = (req, res) => {
   Restaurant.find({}).sort( { rating: -1 } ).then((restaurants) => {
@@ -130,4 +132,13 @@ module.exports.pic = (req, res) => {
   Restaurant.findById(req.params.id).then((restaurant) => {
     res.sendFile(path.join(__dirname, '../', restaurant.file));
   });
+}
+
+module.exports.like = (req, res, next) => {
+  const restaurantId = req.params.id;
+  User.findByIdAndUpdate(req.user._id, { $push: { favourite: restaurantId } })
+    .then(user => {
+      res.redirect('/')
+    })
+    .catch(err => { next(err) })
 }
