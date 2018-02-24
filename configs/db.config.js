@@ -1,13 +1,12 @@
 const mongoose = require('mongoose');
-const MONGO_URI = process.env.MONGO_URI;
-const DB_NAME = process.env.DB_NAME;
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost/restaurator';
 
-console.log(MONGO_URI+DB_NAME);
+console.log(MONGO_URI);
 
 mongoose.Promise = Promise;
-mongoose.connect(MONGO_URI+DB_NAME)
+mongoose.connect(MONGO_URI)
     .then(() => {
-        console.log(`Connected to ${DB_NAME} database.`);
+        console.log(`Connected to ${MONGO_URI} database.`);
     }).catch((error) => {
         console.error(`Database connection error: ${error}`);
     });
