@@ -9,8 +9,10 @@ const JustEatSchema = new mongoose.Schema({
       type: Number,
   },
   geo_location: {
+
     lat: {type: String},
     lon: {type: String}
+
   },
   location: {
       type: String,
@@ -24,11 +26,13 @@ const JustEatSchema = new mongoose.Schema({
   categories: [
     {
       type: String,
+
     }
   ],
   href: {
       type: String,
   },
+
 });
 
 const JustEat = mongoose.model('Justeat', JustEatSchema);

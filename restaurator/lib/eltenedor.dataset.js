@@ -130,10 +130,12 @@
       "id": "ZXRQcmVjaW8gZGUgbGFzIGJlYmlkYXNDYWbDqQ==\n"
     }]
   }],
+
   lat: 40.4395689, lng: -3.7139636
   "geo_location": {
     "lat": 40.4395689,
     "lon": -3.7139636
+
   },
   "location": "Madrid",
   "address": "Calle de Cea Bermúdez, 38, Madrid",

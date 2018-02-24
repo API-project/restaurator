@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const ElTenedorSchema = new mongoose.Schema({
+
   name: {
     type: String,
   },
@@ -25,6 +26,7 @@ const ElTenedorSchema = new mongoose.Schema({
       type: String,
     },
   ],
+
 });
 
 const ElTenedor = mongoose.model('Eltenedor', ElTenedorSchema);

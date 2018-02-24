@@ -1,8 +1,10 @@
 const Restaurant = require('../models/restaurants.model');
 const ElTenedor = require('../models/eltenedor.model');
+
 const JustEat = require('../models/justeat.model');
 
 const async = require('async');
+
 
 module.exports.result = (req, res, next) => {
   const restaurantsArray = req.body;
@@ -62,3 +64,4 @@ module.exports.result = (req, res, next) => {
     console.log('done');
   });
 };
+
