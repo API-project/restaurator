@@ -1,5 +1,8 @@
 const Restaurant = require('../models/restaurants.model');
 
+
+//const DatasetExCompany = require('../lib/11870.fakeapi');
+
 module.exports.result = (req, res) => {
   console.log(req.body[0].name)
   const {
@@ -14,7 +17,7 @@ module.exports.result = (req, res) => {
   // console.log(req.body[0].rating);
   // console.log(req.body[0].direction);
   // console.log(req.body[0].imageUrl);
-  // console.log(req.body[0].location);
+   console.log(req.body[0].location);
   // console.log(req.body[0].place_id);
 
   Restaurant.findOne({place_id: req.body.place_id}, (err, restaurant) => {
@@ -30,6 +33,7 @@ module.exports.result = (req, res) => {
                               location: req.body[i].location,
                               place_id: req.body[i].place_id,
                             })
+                            
                             newRestaurant.save()
                             .then(result => {
                               console.log(`Restaurante ${req.body.name} guardado correctamente`)
