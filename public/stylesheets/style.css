@@ -1,18 +1,16 @@
 .nav-wrapper {
   display: block;
-  margin-left: : 500px;
 
 }
 body {
-  padding: 50px;
+  padding: 10px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 html {
-  height: 100%;
   margin: 0;
-  width: 800px;
-  height: 400 px;
+  width: 1200px;
+  height: 1200px;
   padding: 20px;
 }
 
@@ -21,20 +19,18 @@ a {
 }
 
 #map {
-  width: 400px;
-  height: 400px;
+  padding: 10px;
+  width: 500px;
+  height: 500px;
   background: lightgray;
-  margin-bottom:  20px;
-}
-
-article {
-  padding:  20px;
+  margin:  20px;
 }
 
 .card {
-  display: block;
-  width: 400px;
-  position: relative;
+  margin:  20px;
+  padding: 10px;
+  width: 350px;
+
 }
 
 
@@ -52,23 +48,17 @@ article {
         cursor: pointer;
         /* overflow-x: hidden; */
       }
-      #findhotels {
-        position: absolute;
-        text-align: right;
-        width: 100px;
-        font-size: 14px;
-        padding: 4px;
-        z-index: 5;
-        background-color: #fff;
-      }
+
+#search-title {
+  margin-top: 20px;
+
+}
       #locationField {
-        position: absolute;
+        position: relative;
         width: 190px;
-        height: 25px;
-        left: 108px;
-        top: 0px;
-        z-index: 5;
-        background-color: #fff;
+        top: 2px;
+        padding: 2px;
+
       }
       #controls {
         position: absolute;
