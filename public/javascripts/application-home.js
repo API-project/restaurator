@@ -4,7 +4,7 @@ var autocomplete;
 var countryRestrict = {
   'country': 'ES'
 };
-var MARKER_PATH = 'https://developers.google.com/maps/documentation/javascript/images/marker_green';
+var MARKER_PATH = 'https://i1.wp.com/www.hentiesbaytourism.com/wp-content/uploads/2016/06/restaurant_marker';
 var hostnameRegexp = new RegExp('^https?://.+?/');
 
 class googleData {
@@ -177,13 +177,17 @@ function search() {
       // Create a marker for each hotel found, and
       // assign a letter of the alphabetic to each marker icon.
       for (var i = 0; i < results.length; i++) {
-        var markerLetter = String.fromCharCode('A'.charCodeAt(0) + (i % 26));
-        var markerIcon = MARKER_PATH + markerLetter + '.png';
+        //var markerLetter = String.fromCharCode('A'.charCodeAt(0) + (i % 26));
+        var markerIcon = MARKER_PATH  + '.png';
         // Use marker animation to drop the icons incrementally on the map.
         markers[i] = new google.maps.Marker({
           position: results[i].geometry.location,
-          animation: google.maps.Animation.DROP,
-          icon: markerIcon
+          animation: google.maps.Animation.BOUNCE,
+          icon: {
+                   url: MARKER_PATH  + '.png',
+                   anchor: new google.maps.Point(10, 10),
+                   scaledSize: new google.maps.Size(40, 47)
+               }
 
         });
 
@@ -290,8 +294,11 @@ function dropMarker(i) {
 
 function addResult(result, i) {
   var results = document.getElementById('results');
-  var markerLetter = String.fromCharCode('A'.charCodeAt(0) + (i % 26));
-  var markerIcon = MARKER_PATH + markerLetter + '.png';
+  //var markerLetter = String.fromCharCode('A'.charCodeAt(0) + (i % 26));
+  var markerIcon = MARKER_PATH + '.png';
+
+
+
 
   var tr = document.createElement('tr');
   tr.style.backgroundColor = (i % 2 === 0 ? '#F0F0F0' : '#FFFFFF');
