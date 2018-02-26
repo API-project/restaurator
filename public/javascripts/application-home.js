@@ -4,7 +4,7 @@ var autocomplete;
 var countryRestrict = {
   'country': 'ES'
 };
-var MARKER_PATH = 'https://developers.google.com/maps/documentation/javascript/images/marker_green';
+var MARKER_PATH = 'https://i1.wp.com/www.hentiesbaytourism.com/wp-content/uploads/2016/06/restaurant_marker';
 var hostnameRegexp = new RegExp('^https?://.+?/');
 
 class googleData {
@@ -25,97 +25,15 @@ class googleData {
 
 
 var countries = {
-  'Chm': {
-    center: {
-      lat: 40.4362303,
-      lng: -3.7216465
-    },
-    zoom: 4
-  },
-  'br': {
-    center: {
-      lat: -14.2,
-      lng: -51.9
-    },
-    zoom: 3
-  },
-  'ca': {
-    center: {
-      lat: 62,
-      lng: -110.0
-    },
-    zoom: 3
-  },
-  'fr': {
-    center: {
-      lat: 46.2,
-      lng: 2.2
-    },
-    zoom: 5
-  },
-  'de': {
-    center: {
-      lat: 51.2,
-      lng: 10.4
-    },
-    zoom: 5
-  },
-  'mx': {
-    center: {
-      lat: 23.6,
-      lng: -102.5
-    },
-    zoom: 4
-  },
-  'nz': {
-    center: {
-      lat: -40.9,
-      lng: 174.9
-    },
-    zoom: 5
-  },
-  'it': {
-    center: {
-      lat: 41.9,
-      lng: 12.6
-    },
-    zoom: 5
-  },
-  'za': {
-    center: {
-      lat: -30.6,
-      lng: 22.9
-    },
-    zoom: 5
-  },
-  'es': {
-    center: {
-      lat: 40.5,
-      lng: -3.7
-    },
-    zoom: 5
-  },
-  'pt': {
-    center: {
-      lat: 39.4,
-      lng: -8.2
-    },
-    zoom: 6
-  },
+
   'ES': {
     center: {
       lat: 40.43623,
       lng: -3.721604
     },
-    zoom: 3
+    zoom: 10
   },
-  'uk': {
-    center: {
-      lat: 54.8,
-      lng: -4.6
-    },
-    zoom: 5
-  }
+
 };
 
 function initMap() {
@@ -177,13 +95,17 @@ function search() {
       // Create a marker for each hotel found, and
       // assign a letter of the alphabetic to each marker icon.
       for (var i = 0; i < results.length; i++) {
-        var markerLetter = String.fromCharCode('A'.charCodeAt(0) + (i % 26));
-        var markerIcon = MARKER_PATH + markerLetter + '.png';
+        //var markerLetter = String.fromCharCode('A'.charCodeAt(0) + (i % 26));
+        var markerIcon = MARKER_PATH  + '.png';
         // Use marker animation to drop the icons incrementally on the map.
         markers[i] = new google.maps.Marker({
           position: results[i].geometry.location,
-          animation: google.maps.Animation.DROP,
-          icon: markerIcon
+          animation: google.maps.Animation.BOUNCE,
+          icon: {
+                   url: MARKER_PATH  + '.png',
+                   anchor: new google.maps.Point(10, 10),
+                   scaledSize: new google.maps.Size(40, 47)
+               }
 
         });
 
@@ -290,8 +212,11 @@ function dropMarker(i) {
 
 function addResult(result, i) {
   var results = document.getElementById('results');
-  var markerLetter = String.fromCharCode('A'.charCodeAt(0) + (i % 26));
-  var markerIcon = MARKER_PATH + markerLetter + '.png';
+  //var markerLetter = String.fromCharCode('A'.charCodeAt(0) + (i % 26));
+  var markerIcon = MARKER_PATH + '.png';
+
+
+
 
   var tr = document.createElement('tr');
   tr.style.backgroundColor = (i % 2 === 0 ? '#F0F0F0' : '#FFFFFF');

@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost/restaurator';
 
-console.log(MONGO_URI);
-
 mongoose.Promise = Promise;
 mongoose.connect(MONGO_URI)
     .then(() => {

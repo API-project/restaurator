@@ -1,6 +1,6 @@
 const Restaurant = require('../models/restaurants.model');
 const ElTenedor = require('../models/eltenedor.model');
-
+const Dishes = require('../models/dishes.model');
 const JustEat = require('../models/justeat.model');
 
 const async = require('async');
@@ -17,10 +17,10 @@ module.exports.result = (req, res, next) => {
         if (foundRestaurant) {
           console.log('It already exists');
         } else {
-          const imageUrl =
-          restaurant.imageUrl && restaurant.imageUrl[0].html_attributions[0]
-            ? restaurant.imageUrl[0].html_attributions[0]
-            : '';
+          // const imageUrl =
+          // restaurant.imageUrl && restaurant.imageUrl[0].html_attributions[0]
+          //   ? restaurant.imageUrl[0].html_attributions[0]
+          //   : '';
           const location = {
             lat: restaurant.location.location.lat,
             lng: restaurant.location.location.lng,
@@ -33,10 +33,14 @@ module.exports.result = (req, res, next) => {
           ElTenedor.findOne({geo_location})
             .then(eltenedor => {
               geo_location['lon'] = geo_location.lon.slice(0, geo_location.lon.length - 1);
+              const categories = eltenedor ? eltenedor.categories : [];
+              const reservation = eltenedor ? eltenedor.reservation : [];
               JustEat.findOne({geo_location})
                 .then(justeat => {
-                  const categories = eltenedor ? eltenedor.categories : [];
                   const href = justeat ? justeat.href : '';
+                  Dishes.findOne({geo_location})
+                    .then(dishes => {
+                      const imageUrl = dishes ? dishes.imageUrl : '';
                   const newRestaurant = new Restaurant({
                      name: restaurant.name,
                      rating: restaurant.rating,
@@ -46,16 +50,21 @@ module.exports.result = (req, res, next) => {
                      place_id: restaurant.place_id,
                      categories,
                      href,
+                     reservation,
                    });
+
                   newRestaurant.save()
                     .then(() => {
                       console.log(`${newRestaurant.name} creado`);
+
                     })
                     .catch(err => {next(err)})
                 })
                 .catch(err => {next(err)})
             })
             .catch(err => {next(err)})
+          })
+          .catch(err => {next(err)})
         }
       })
       .catch(err => {next(err)})
@@ -64,4 +73,3 @@ module.exports.result = (req, res, next) => {
     console.log('done');
   });
 };
-

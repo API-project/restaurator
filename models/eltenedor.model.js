@@ -26,6 +26,7 @@ const ElTenedorSchema = new mongoose.Schema({
       type: String,
     },
   ],
+  reservation: {type: String}
 
 });
 

@@ -5,13 +5,15 @@ const bcryptSalt = 10;
 const path = require('path');
 
 
+
 module.exports.index = (req, res) => {
-  Restaurant.find({}).sort( { rating: -1 } ).then((restaurants) => {
+  Restaurant.find({}).populate('favourite').sort( { rating: -1 } ).then((restaurants) => {
     res.render("restaurants/index", {
       restaurants: restaurants
     });
-  });
+  }).catch(error => next(error));
 };
+
 
 module.exports.new = (req, res) => {
   res.render('restaurants/new', {
@@ -38,7 +40,7 @@ module.exports.create = (req, res) => {
     error.email = 'Email is required';
   }
   if (!password) {
-    error.password = 'Passoword is required';
+    error.password = 'Password is required';
   }
   if (error.name || error.email || error.password) {
     res.render("/restaurants/new", {
@@ -52,7 +54,7 @@ module.exports.create = (req, res) => {
         error: "The name already exists"
       });
       return;
-    }
+    } else {
     const salt = bcrypt.genSaltSync(bcryptSalt);
     console.log('Imprimo password, luego salt => ')
     console.log(password)
@@ -75,16 +77,28 @@ module.exports.create = (req, res) => {
           error: "Something went wrong"
         });
       });
+    }
   })
 };
 
-// module.exports.show = (req, res, next) => {
-//   Restaurant.find({}).sort( { rating: -1 } ).then((restaurants) => {
-//     res.render("restaurants/index", {
-//       restaurants: restaurants
-//     });
-//   });
-// };
+
+
+module.exports.show = (req, res, next) => {
+    Mission.findById(req.params.id)
+        .populate('favourite')
+        .then((restaurants) => {
+            res.render('restaurants/show', {
+                restaurants: restaurants
+            });
+        })
+        .catch((error) => {
+            res.redirect('/');
+            next(error);
+        })
+};
+
+
+
 
 module.exports.edit = (req, res, next) => {
   Restaurant.findById(req.params.id).then((restaurant) => {
@@ -99,18 +113,18 @@ module.exports.edit = (req, res, next) => {
   });
 };
 
-// module.exports.update = (req, res, next) => {
-//   const restaurantId = req.params.id;
-//   const updates = {
-//       name: req.body.name,
-//       imageUrl: req.body.imageUrl,
-//       description: req.body.description
-//   };
-//
-//   Restaurant.findByIdAndUpdate(restaurantId, updates).then((restaurant) => {
-//     res.redirect('/index');
-//   });
-// };
+module.exports.update = (req, res, next) => {
+  const restaurantId = req.params.id;
+  const updates = {
+      name: req.body.name,
+      imageUrl: req.body.imageUrl,
+      description: req.body.description
+  };
+
+  Restaurant.findByIdAndUpdate(restaurantId, updates).then((restaurant) => {
+    res.redirect('/index');
+  });
+};
 
 
 module.exports.delete = (req, res) => {
@@ -138,7 +152,7 @@ module.exports.like = (req, res, next) => {
   const restaurantId = req.params.id;
   User.findByIdAndUpdate(req.user._id, { $push: { favourite: restaurantId } })
     .then(user => {
-      res.redirect('/')
+      res.redirect('restaurants/show')
     })
     .catch(err => { next(err) })
 }

@@ -1,30 +1,42 @@
+<div class="container">
 <br>
     <h1>Login</h1>
     <p>Welcome to Restaurator</p>
+
 
 <% if (flash.welcome) {%>
     <p><strong> <%= flash.welcome %> </strong></p>
 <% } %>
 
-<div class="row">
-            <div class="col s12 m7">
-    <p>  <% restaurants.forEach((restaurant) => { %>
-          <div class="card">
-            <div class="card-image">
-              <img src="http://abaceriadelsurblog.es/wp-content/uploads/2014/12/restaurantes.jpg">
-              <span class="card-title"><p><%= restaurant.name %></p></span>
-            </div>
-            <div class="card-content">
-        <p><span>Rating: </span><%= restaurant.rating %></p>
-        <p><%= restaurant.direction %></p>
-        <p><%= restaurant.category %></p>
-            </div>
-            <div class="card-action">
-              <a href="/restaurants/like/<%=restaurant._id%>">Me gusta</a>
-              <a href="#">Pedir</a>
-            </div>
-          </div>
-          </p>
-          <% }) %>
-        </div>
-      </div>
+
+
+</div>
+
+</div>
+
+<!-- <div class="ui fixed inverted menu" id='nav-bar'>
+
+  <div id="header-left">
+
+    <div class="header item">
+      <a href="/users/home">
+        <i class='inverted yellow large home icon'></i>
+      </a>
+    </div>
+    <div class="header item">
+      <p>Hi, @
+        <%=session.username%>
+      </p>
+    </div>
+
+  </div>
+
+  <div id="header-right">
+    <a href="/users/profile/<%= session._id %>" class="item">My Profile</a>
+    <form action="/logout" method='POST' id="header-nav">
+      <button class='ui button inverted red' id='logout' type="submit"> Logout </button>
+    </form>
+
+      <img src="<%= session.image %>" class="ui avatar image" id="avatarImage">
+  </div>
+</div> -->

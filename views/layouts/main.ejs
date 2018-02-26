@@ -1,63 +1,74 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Restaurator</title>
-  <!-- Bootstrap -->
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
-  <!--Import Google Icon Font-->
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<!--Import materialize-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <!--Import materialize-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
   <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
   <script type="text/javascript" src="/javascripts/application-home.js"></script>
 
 
-    <!-- Google Maps -->
+  <!-- Google Maps -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCscTbTrX-GiGtgj9E2v6ZmKUoz5xv7b4w&libraries=places&callback=initMap" async defer></script>
 
 
 
-  <!-- <nav class="navbar navbar-default" role="navigation">
-      <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-          </button>
-      </div> -->
-  <nav>
-    <div class="nav-wrapper orange darken-3">
-      <a href="/" class="brand-logo">Restaurator</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
+  <div>
+    <nav class="col s12">
+      <div class="nav-wrapper orange darken-3">
+        <a href="/" class="brand-logo">Restaurator</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <% if (typeof(session) != 'undefined') { %>
+        <li><a href="/auth/profile/<%= session._id %>" class="item">My Profile</a></li>
+        <li><a href="/logout">Logout</a></li>
+      <% } else { %>
         <li><a href="/signup">SignUp</a></li>
         <li><a href="/login">Login</a></li>
-        <li><a href="/restaurants/new">Register</a></li>
-      </ul>
-    </div>
-  </nav>
-      <!-- <div class="navbar">
-          <ul class="nav navbar-nav navbar-left">
-              <li><a href="http://localhost:3000/signup" class="waves-effect waves-light btn">SignUp</a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-center">
-              <li><a href="http://localhost:3000/login" class="waves-effect waves-light btn">Login</a></li>
-
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-              <li><a href="http://localhost:3000/restaurants/new" class="waves-effect waves-light btn">RegisterRestaurant</a></li>
-          </ul> -->
+        <li><a href="/restaurants/new">Restaurants</a></li>
+      <% } %>
+        </ul>
       </div>
+    </nav>
+  </div>
 
 </head>
-<body>
-  <!-- <h1>Restaurator</h1> -->
-<section class="container">
 
-    <article>
-      <%- body -%>
-    </article>
-  </section>
- </body>
+<body class="col s12">
+
+  <%- body -%>
+
+</body>
+
+
+        <footer class="page-footer orange darken-3">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">Footer Content</h5>
+                <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="#!">Link 1</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Link 2</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+                  <li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            © 2014 Copyright Text
+            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+          </div>
+        </footer>
+
 </html>
