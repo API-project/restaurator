@@ -95,6 +95,11 @@ module.exports.doSignup = (req, res, next) => {
     }
 
 module.exports.logout = (req, res, next) => {
-  req.logout();
-  res.redirect('/login');
+  req.session.destroy(error => {
+        if (error) {
+            next(error);
+        } else {
+            res.redirect("/login");
+        }
+    });
 }

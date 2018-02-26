@@ -45,7 +45,7 @@ const RestaurantSchema = new mongoose.Schema({
         type: String,
    },
    href: {type: String},
-   reservation: {type: String},
+   reservation: {type: String}
 
  }, { timestamps: true });
 

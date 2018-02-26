@@ -35,12 +35,10 @@ module.exports.result = (req, res, next) => {
               geo_location['lon'] = geo_location.lon.slice(0, geo_location.lon.length - 1);
               const categories = eltenedor ? eltenedor.categories : [];
               const reservation = eltenedor ? eltenedor.reservation : [];
+              const imageUrl = eltenedor ? eltenedor.imageUrl : '';
               JustEat.findOne({geo_location})
                 .then(justeat => {
                   const href = justeat ? justeat.href : '';
-                  Dishes.findOne({geo_location})
-                    .then(dishes => {
-                      const imageUrl = dishes ? dishes.imageUrl : '';
                   const newRestaurant = new Restaurant({
                      name: restaurant.name,
                      rating: restaurant.rating,
@@ -56,13 +54,10 @@ module.exports.result = (req, res, next) => {
                   newRestaurant.save()
                     .then(() => {
                       console.log(`${newRestaurant.name} creado`);
-
                     })
                     .catch(err => {next(err)})
                 })
                 .catch(err => {next(err)})
-            })
-            .catch(err => {next(err)})
           })
           .catch(err => {next(err)})
         }

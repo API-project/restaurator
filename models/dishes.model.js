@@ -10,7 +10,7 @@ const DishesSchema = new mongoose.Schema({
   geo_location: {
     lat: {type: String},
     lon: {type: String}
-  },
+  }
 
 });
 

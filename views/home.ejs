@@ -5,6 +5,7 @@
     <div class="col s10 pull-s2">
 
 <div class="row">
+  <!-- <img class="logo-just" src="http://www.brandemia.org/sites/default/files/sites/default/files/logo_just-eat-despues.jpg"> -->
       <div id="search-title" class=" col s5 push-s5"><p> Buscar por: </p></div>
       <div class=" col s12 push-s2" id="locationField">
         <input id="autocomplete" placeholder="Chamberi, Chamartin ..." type="text" />
@@ -51,40 +52,33 @@
 
 
     <div class="row">
-
       <p>
         <% restaurants.forEach((restaurant) => { %>
           <div class="col s4 pull-s1">
           <div class="card">
             <div class="card-image">
-              <img src="https://s3-eu-west-1.amazonaws.com/assets.11870.com/originales/imagenes/3c/3c1523506c3cc8a0b640da99b37898a7">
 
-              <% var index = Math.floor(Math.random() * restaurants.length); %>
-            <p><%= restaurants[index].rating %> <%= restaurants[index].name %> <%= restaurants[index].direction %></p>
-              <span class="card-title"><p><%= restaurant.name %></p></span>
               <a class="btn-floating halfway-fab waves-effect waves-light orange darken-3" href="/restaurants/like/<%=restaurant._id%>"><i class="material-icons">add</i></a>
-            </div>
+                <% if (restaurant.imageUrl !== 'undefined') { %>
+                <img src="https://s3-eu-west-1.amazonaws.com/assets.11870.com/originales/imagenes/3c/3c1523506c3cc8a0b640da99b37898a7">
+                  <% } else { %>
+                    <% var index = Math.floor(Math.random() * restaurants.length); %>
+                      <img src=<%= restaurants[index].imageUrl %>>
+                      <% } %>
+              </div>
             <div class="card-content">
-              <p><span>Rating: </span>
-                <%= restaurant.rating %>
-              </p>
-              <p>
-                <%= restaurant.direction %>
-              </p>
-              <p>
-                <%= restaurant.categories %>
-              </p>
-            </div>
-            <div class="card-action">
-
+              <span class="card-title"><p><%= restaurant.name %></p></span>
+              <p><span>Rating: </span><%= restaurant.rating %></p>
+              <p><%= restaurant.direction %></p>
+              <p><%= restaurant.categories %></p>
+            </div><div class="card-action">
               <a href=<%= restaurant.href %>>Pedir a domicilio</a>
-              <a href="#">Reservar</a>
+              <a href=<%= restaurant.reservation %>>Reservar</a>
             </div>
           </div>
       </p>
       </div>
       <% }) %>
-
-
   </div>
+</div>
 </div>

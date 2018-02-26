@@ -18,6 +18,9 @@ const ElTenedorSchema = new mongoose.Schema({
   address: {
     type: String,
   },
+  imageUrl: {
+    type: String,
+  },
   id: {
     type: String,
   },
