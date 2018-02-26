@@ -7,7 +7,8 @@ const path = require('path');
 
 
 module.exports.index = (req, res) => {
-  Restaurant.find({}).populate('favourite').sort( { rating: -1 } ).then((restaurants) => {
+  Restaurant.find({}).sort( { rating: -1 } )
+  .then((restaurants) => {
     res.render("restaurants/index", {
       restaurants: restaurants
     });
@@ -84,7 +85,7 @@ module.exports.create = (req, res) => {
 
 
 module.exports.show = (req, res, next) => {
-    Mission.findById(req.params.id)
+    Restaurant.findById(req.params.id)
         .populate('favourite')
         .then((restaurants) => {
             res.render('restaurants/show', {
@@ -114,25 +115,32 @@ module.exports.edit = (req, res, next) => {
 };
 
 
-module.exports.delete = (req, res) => {
-  Restaurant.remove({
-    _id: req.params.id
-  }).then(() => {
-    res.redirect("restaurants");
-  }).catch(err => { next(err) })
+module.exports.delete = (req, res, next) => {
+Restaurant.findByIdAndRemove(req.params.id)
+    .then((restaurants) => {
+        res.render('restaurants/index', {
+            restaurants: restaurants
+        });
+    })
+    .catch((error) => {
+        res.redirect('/');
+        next(error);
+    })
 };
 
-module.exports.pic = (req, res) => {
-  Restaurant.findById(req.params.id).then((restaurant) => {
-    res.sendFile(path.join(__dirname, '../', restaurant.file));
-  });
-}
+
+// module.exports.pic = (req, res) => {
+//   Restaurant.findById(req.params.id)
+//   .then((restaurant) => {
+//     res.sendFile(path.join(__dirname, '../', restaurant.file));
+//   });
+// }
 
 module.exports.like = (req, res, next) => {
   const restaurantId = req.params.id;
   User.findByIdAndUpdate(req.user._id, { $push: { favourite: restaurantId } })
     .then(user => {
-      res.redirect('/like')
+      res.redirect('restaurants/show')
     })
     .catch(err => { next(err) })
 }
