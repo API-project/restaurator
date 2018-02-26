@@ -21,7 +21,7 @@
         <a href="/" class="brand-logo">Restaurator</a>
 
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <% if (typeof(session) != 'undefined') { %>
+      <% if (typeof(session) == 'undefined') { %>
         <li><a href="/auth/profile/<%= session._id %>" class="item">My Profile</a></li>
         <li><a href="/logout">Logout</a></li>
       <% } else { %>
@@ -50,7 +50,7 @@
                 <h5 class="white-text">Restaurator</h5>
                 <p class="grey-text text-lighten-4">Agregador de webs de restaurantes para reservar mesa o pedir a domicilio.</p>
               </div>
-          
+
             </div>
           </div>
           <div class="footer-copyright">
