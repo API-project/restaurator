@@ -25,61 +25,21 @@ module.exports.new = (req, res) => {
 
 module.exports.create = (req, res) => {
   console.log(req.body)
-  const {
-    name,
-    email,
-    password,
-    description
-  } = req.body;
-  let error = {};
-  //const location = req.body.latitude, req.body.longitude;
-  //const file = `/documents/${req.file}`;
-  if (!name) {
-    error.name = 'Name is required';
-  }
-  if (!email) {
-    error.email = 'Email is required';
-  }
-  if (!password) {
-    error.password = 'Password is required';
-  }
-  if (error.name || error.email || error.password) {
-    res.render("/restaurants/new", {
-      error
-    });
-  }
-
-  Restaurant.findOne({email}, (err, restaurant) => {
-    if (restaurant !== null) {
-      res.render("/restaurants/new", {
-        error: "The name already exists"
-      });
-      return;
-    } else {
-    const salt = bcrypt.genSaltSync(bcryptSalt);
-    console.log('Imprimo password, luego salt => ')
-    console.log(password)
-    console.log(salt)
-    const hashPass = bcrypt.hashSync(password, salt);
-    const newRestaurant = new Restaurant({
-      name,
-      email,
-      password: hashPass,
-      description
-    });
-    newRestaurant.save()
-      .then(result => {
-        console.log('Restaurante guardado correctamente')
-        res.redirect("restaurants/index");
-      })
-      .catch(err => {
-        console.log(err)
-        res.render("restaurants/new", {
-          error: "Something went wrong"
-        });
-      });
-    }
-  })
+  new Restaurant({
+   name: req.body.name,
+   description: req.body.description,
+   categories: req.body.categories,
+   direction: req.body.direction,
+ }).save()
+   .then((restaurant) => {
+     console.log("el restaurante se creó");
+     res.redirect("/");
+   })
+   .catch((err) => {
+     res.render('restaurants/new', {
+       err: err,
+     });
+   });
 };
 
 
@@ -100,19 +60,18 @@ module.exports.show = (req, res, next) => {
 
 
 
-
-module.exports.edit = (req, res, next) => {
-  Restaurant.findById(req.params.id).then((restaurant) => {
-    res.render('restaurants/new', {
-      restaurant: restaurant
-    }).catch(err => {
-      console.log(err)
-      res.render("restaurants/new", {
-        error: "Something went wrong"
-      });
-    });
-  });
-};
+// module.exports.edit = (req, res, next) => {
+//   Restaurant.findById(req.params.id).then((restaurant) => {
+//     res.render('restaurants/new', {
+//       restaurant: restaurant
+//     }).catch(err => {
+//       console.log(err)
+//       res.render("restaurants/new", {
+//         error: "Something went wrong"
+//       });
+//     });
+//   });
+// };
 
 
 module.exports.delete = (req, res, next) => {
@@ -140,7 +99,7 @@ module.exports.like = (req, res, next) => {
   const restaurantId = req.params.id;
   User.findByIdAndUpdate(req.user._id, { $push: { favourite: restaurantId } })
     .then(user => {
-      res.redirect('restaurants/show')
+      res.redirect('/')
     })
     .catch(err => { next(err) })
 }

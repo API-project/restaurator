@@ -40,8 +40,8 @@ a {
   padding: 10px;
   margin:  20px;
   border-radius: 10px;
-
 }
+
 
 .card {
   margin:  20px;
@@ -123,3 +123,9 @@ a {
       .iw_table_icon {
         text-align: right;
       }
+
+.alert {
+  width:300px;
+  height: 300px;
+  padding: 50px;
+}
