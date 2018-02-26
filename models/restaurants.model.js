@@ -1,8 +1,4 @@
 const mongoose = require('mongoose');
-const mongooseEmail = require('mongoose-type-email');
-const bcrypt = require("bcryptjs");
-const bcryptSalt = 10;
-
 
 const RestaurantSchema = new mongoose.Schema({
    name: {
@@ -11,14 +7,6 @@ const RestaurantSchema = new mongoose.Schema({
    },
    place_id: {
        type: String
-   },
-   email: {
-       type: mongoose.SchemaTypes.Email,
-      // required: [true, 'Email is required'],
-   },
-   password: {
-       type: String,
-       //required: [true, 'User needs a password']
    },
    categories: [
      {
@@ -45,7 +33,7 @@ const RestaurantSchema = new mongoose.Schema({
         type: String,
    },
    href: {type: String},
-   reservation: {type: String},
+   reservation: {type: String}
 
  }, { timestamps: true });
 
