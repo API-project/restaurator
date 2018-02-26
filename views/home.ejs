@@ -2,13 +2,14 @@
 
   <div class="row">
 
-    <div class="col s5 pull-s2">
+    <div class="col s10 pull-s2">
 
 <div class="row">
-      <div id="search-title" class=" col s5 push-s2"><p> Buscar por: </p></div>
-      <div class=" col s5 push-s2" id="locationField">
+      <div id="search-title" class=" col s5 push-s5"><p> Buscar por: </p></div>
+      <div class=" col s12 push-s2" id="locationField">
         <input id="autocomplete" placeholder="Chamberi, Chamartin ..." type="text" />
       </div>
+      <button class="btn col s2 push-s3 orange darken-3"><a class="text" href="/">Más info</a></button>
 </div>
       <div id="map"></div>
 
@@ -48,12 +49,18 @@
 
     </div>
 
-    <div class="col s6 push-s2">
+
+    <div class="row">
+
       <p>
         <% restaurants.forEach((restaurant) => { %>
+          <div class="col s4 pull-s1">
           <div class="card">
             <div class="card-image">
-              <img src="http://abaceriadelsurblog.es/wp-content/uploads/2014/12/restaurantes.jpg">
+              <img src="https://s3-eu-west-1.amazonaws.com/assets.11870.com/originales/imagenes/3c/3c1523506c3cc8a0b640da99b37898a7">
+
+              <% var index = Math.floor(Math.random() * restaurants.length); %>
+            <p><%= restaurants[index].rating %> <%= restaurants[index].name %> <%= restaurants[index].direction %></p>
               <span class="card-title"><p><%= restaurant.name %></p></span>
               <a class="btn-floating halfway-fab waves-effect waves-light orange darken-3" href="/restaurants/like/<%=restaurant._id%>"><i class="material-icons">add</i></a>
             </div>
@@ -65,18 +72,19 @@
                 <%= restaurant.direction %>
               </p>
               <p>
-                <%= restaurant.category %>
+                <%= restaurant.categories %>
               </p>
             </div>
             <div class="card-action">
 
-              <a href="#">Pedir a domicilio</a>
+              <a href=<%= restaurant.href %>>Pedir a domicilio</a>
               <a href="#">Reservar</a>
             </div>
           </div>
       </p>
+      </div>
       <% }) %>
-    </div>
-  </div>
 
+
+  </div>
 </div>

@@ -7,18 +7,18 @@ const bcryptSalt = 10;
 const RestaurantSchema = new mongoose.Schema({
    name: {
        type: String,
-       //require: [true, 'Name is required'],
+       //required: [true, 'Name is required'],
    },
    place_id: {
        type: String
    },
    email: {
        type: mongoose.SchemaTypes.Email,
-       //require: [true, 'Email is required'],
+      // required: [true, 'Email is required'],
    },
    password: {
        type: String,
-       //require: [true, 'User needs a password']
+       //required: [true, 'User needs a password']
    },
    categories: [
      {
@@ -45,7 +45,8 @@ const RestaurantSchema = new mongoose.Schema({
         type: String,
    },
    href: {type: String},
-   file: String,
+   reservation: {type: String},
+
  }, { timestamps: true });
 
  const Restaurant = mongoose.model('Restaurant', RestaurantSchema);
