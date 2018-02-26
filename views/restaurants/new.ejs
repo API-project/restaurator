@@ -4,6 +4,9 @@
 <% } %>
 
 
+
+
+
 <form action="new" method="POST">
   <div class="form-group">
     <label for="name">Restaurant Name</label>
@@ -14,16 +17,16 @@
   </div>
 
   <div class="form-group">
-    <label for="email">Restaurant Email</label>
-    <input type="text" class="form-control" id="email" placeholder="Restaurant Email" name="email">
-    <% if (error.email) { %>
-      <p style="color: red"> <%= error.email %></p>
+    <label for="email">Restaurant Category</label>
+    <input type="text" class="form-control" id="email" placeholder="Restaurant Category" name="email">
+    <% if (error.categories) { %>
+      <p style="color: red"> <%= error.categories %></p>
     <% } %>
   </div>
 
   <div class="form-group">
-    <label for="password">Restaurant Password</label>
-    <input type="password" class="form-control" id="password" placeholder="Restaurant Password" name="password">
+    <label for="password">Restaurant address</label>
+    <input type="password" class="form-control" id="password" placeholder="Restaurant Address" name="password">
     <% if (error.password) { %>
       <p style="color: red"> <%= error.password %></p>
     <% } %>

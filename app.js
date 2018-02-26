@@ -16,6 +16,7 @@ const LocalStrategy = require("passport-local").Strategy;
 const flash = require("connect-flash");
 const JsonDB = require('node-json-db');
 
+
 // Import DB config
 require('./configs/db.config');
 require('./configs/passport.config').setup(passport);

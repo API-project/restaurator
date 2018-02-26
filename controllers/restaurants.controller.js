@@ -113,33 +113,13 @@ module.exports.edit = (req, res, next) => {
   });
 };
 
-module.exports.update = (req, res, next) => {
-  const restaurantId = req.params.id;
-  const updates = {
-      name: req.body.name,
-      imageUrl: req.body.imageUrl,
-      description: req.body.description
-  };
-
-  Restaurant.findByIdAndUpdate(restaurantId, updates).then((restaurant) => {
-    res.redirect('/index');
-  });
-};
-
 
 module.exports.delete = (req, res) => {
-if(req.user.role == 'admin'){
-
-
   Restaurant.remove({
     _id: req.params.id
   }).then(() => {
-    res.redirect("restaurants/index");
-  });
-  }
-  else {
-    console.error('User is not admin');
-  }
+    res.redirect("restaurants");
+  }).catch(err => { next(err) })
 };
 
 module.exports.pic = (req, res) => {
@@ -152,7 +132,7 @@ module.exports.like = (req, res, next) => {
   const restaurantId = req.params.id;
   User.findByIdAndUpdate(req.user._id, { $push: { favourite: restaurantId } })
     .then(user => {
-      res.redirect('/')
+      res.redirect('/like')
     })
     .catch(err => { next(err) })
 }

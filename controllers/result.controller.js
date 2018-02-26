@@ -68,3 +68,31 @@ module.exports.result = (req, res, next) => {
     console.log('done');
   });
 };
+
+// module.exports.pic = (req, res, next) => {
+//   Restaurant.findById(req.params.id).then((restaurant) => {
+//       if (restaurant.imageUrl !== "undefined") {
+//         console.log('The image already exists');
+//       } else {
+//         const location = {
+//           lat: restaurant.location.location.lat,
+//           lng: restaurant.location.location.lng,
+//         }
+//         // Used for querying ElTenedor & JustEat.
+//         const geo_location = {
+//           lat: location.lat.toFixed(7),
+//           lon: location.lng.toFixed(7)
+//         };
+//         ElTenedor.findOne({geo_location})
+//           .then(eltenedor => {
+//             geo_location['lon'] = geo_location.lon.slice(0, geo_location.lon.length - 1);
+//             const imageUrl = eltenedor ? eltenedor.imageUrl : '';
+//           }).catch(err => {
+//             next(err)
+//           })
+//       }
+//   })
+//     .catch(err => {
+//       next(err)
+//     })
+// }
