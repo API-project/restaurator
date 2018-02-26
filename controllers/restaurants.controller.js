@@ -134,7 +134,7 @@ if(req.user.role == 'admin'){
   Restaurant.remove({
     _id: req.params.id
   }).then(() => {
-    res.redirect("restaurant/index");
+    res.redirect("restaurants/index");
   });
   }
   else {
@@ -152,7 +152,7 @@ module.exports.like = (req, res, next) => {
   const restaurantId = req.params.id;
   User.findByIdAndUpdate(req.user._id, { $push: { favourite: restaurantId } })
     .then(user => {
-      res.redirect('restaurants/show')
+      res.redirect('/')
     })
     .catch(err => { next(err) })
 }

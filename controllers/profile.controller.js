@@ -6,8 +6,27 @@ module.exports.index = (req, res, next) => {
 };
 
 
-module.exports.paintRestaurants = (req, res) => {
-  User.find({favourite:""}).then((restaurants) => {
-    console.log(favorite);
-  });
-};
+module.exports.show = (req, res) => {
+  const username = req.params.username;
+    User.findOne({ username: req.params.username})
+        .then(user => {
+            if (!user) {
+                next();
+            } else {
+                Tweet.find({username: user.username})
+                    .sort({ createdAt: -1})
+                    .then(favourite => {
+                        res.render('restaurants/show', {
+                            favourite: favourite,
+                            user: user,
+                            // moment: moment,
+                            // session: req.session.currentUser,
+                            // favourite: req.session.currentUser &&
+                            //     req.session.currentUser.favourite.some(f => f == user._id)
+                        })
+                    })
+                    .catch(error => next(error));
+            }
+        })
+        .catch(error => next(error));
+}

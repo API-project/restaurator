@@ -67,7 +67,6 @@ app.use((req, res, next) => {
 })
 
 
-
 app.use('/', home);
 app.use('/', auth);
 app.use('/restaurants', restaurants);

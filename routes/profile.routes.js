@@ -4,7 +4,7 @@ const profileController = require('../controllers/profile.controller');
 
 /* GET home page. */
 router.get('/', profileController.index);
-router.get('/', profileController.paintRestaurants);
+router.get('/', profileController.show);
 
 //prueba master
 module.exports = router;
