@@ -80,14 +80,15 @@ Restaurant.findByIdAndRemove(req.params.id)
 module.exports.like = (req, res, next) => {
   const restaurantId = req.params.id;
   User.findByIdAndUpdate(req.user._id, { $push: { favourite: restaurantId } })
-    .then((user) => {
-      console.log(user)
-      res.render('restaurants/index', {
-          user: user
-      });
+    .then(user => {
+      res.redirect('/')
     })
-    .catch(err => { next(err) })
+    .catch((error) => {
+        res.redirect('/');
+        next(error);
+        })
 }
+
 
 module.exports.show = (req, res, next) => {
   User.find({})
