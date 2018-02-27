@@ -43,23 +43,6 @@ module.exports.create = (req, res) => {
 };
 
 
-
-module.exports.show = (req, res, next) => {
-    Restaurant.findById(req.params.id)
-        .populate('favourite')
-        .then((restaurants) => {
-            res.render('restaurants/show', {
-                restaurants: restaurants
-            });
-        })
-        .catch((error) => {
-            res.redirect('/');
-            next(error);
-        })
-};
-
-
-
 // module.exports.edit = (req, res, next) => {
 //   Restaurant.findById(req.params.id).then((restaurant) => {
 //     res.render('restaurants/new', {
@@ -98,8 +81,34 @@ Restaurant.findByIdAndRemove(req.params.id)
 module.exports.like = (req, res, next) => {
   const restaurantId = req.params.id;
   User.findByIdAndUpdate(req.user._id, { $push: { favourite: restaurantId } })
-    .then(user => {
-      res.redirect('/')
+    .then((user) => {
+      console.log(user)
+      res.render('restaurants/index', {
+          user: user
+      });
     })
     .catch(err => { next(err) })
 }
+
+module.exports.show = (req, res, next) => {
+  User.find({})
+  .then((user) => {
+    Restaurant.find({})
+    .populate('favourite')
+    .then((restaurants) => {
+          // console.log(restaurants)
+            res.render('restaurants/show', {
+                user: user,
+                restaurants: restaurants
+            });
+        })
+        .catch((error) => {
+            res.redirect('/');
+            next(error);
+            })
+        })
+      .catch((error) => {
+          res.redirect('/');
+          next(error);
+      })
+};
