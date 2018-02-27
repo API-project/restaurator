@@ -40,14 +40,19 @@ a {
   padding: 10px;
   margin:  20px;
   border-radius: 10px;
-
 }
+
 
 .card {
   margin:  20px;
   padding: 5px;
   width: 300px;
-  height: 300px;
+  height: 550px;
+}
+
+
+.restaurant-image {
+  height:300px;
 }
 
 .logo-just {
@@ -123,3 +128,9 @@ a {
       .iw_table_icon {
         text-align: right;
       }
+
+.alert {
+  width:300px;
+  height: 300px;
+  padding: 50px;
+}
