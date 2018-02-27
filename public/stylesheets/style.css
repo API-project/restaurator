@@ -23,6 +23,10 @@ a {
   background-image: url("../public/images/chef1.gif");
 }
 
+.general-image {
+  height: 50px;
+}
+
 #map {
   padding: 10px;
   width: 1000px;
@@ -47,6 +51,10 @@ a {
   margin:  20px;
   padding: 5px;
   width: 300px;
+  height: 550px;
+}
+
+.restaurant-image {
   height: 300px;
 }
 
