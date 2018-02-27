@@ -9,6 +9,6 @@ router.post('/new', restaurantsController.create);
 router.post('/:id/delete', restaurantsController.delete);
 // router.get('/:id/pic', restaurantsController.pic);
 router.get('/like/:id', restaurantsController.like);
-router.get('/show', restaurantsController.show);
+router.get('/:id', restaurantsController.show);
 
 module.exports = router;
