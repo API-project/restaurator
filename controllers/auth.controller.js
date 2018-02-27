@@ -75,7 +75,7 @@ module.exports.doSignup = (req, res, next) => {
                 next(error);
               } else {
                 req.flash('welcome', 'Welcome back');
-                res.render('auth/profile');
+                res.render('/');
               }
             });
           }

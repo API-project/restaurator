@@ -12,19 +12,15 @@
   <tbody>
     <% restaurants.forEach((restaurant) => { %>
       <tr>
-
         <td><%= restaurant.name %></td>
         <td><%= restaurant.direction %></td>
         <td><%= restaurant.rating %></td>
-
-
         <td>
           <form action="/restaurants/<%= restaurant._id %>/delete" method="post">
             <input type="submit" value="Delete" class="Delete">
           </form>
         </td>
       </tr>
-
     <% }) %>
   </tbody>
 </table>
