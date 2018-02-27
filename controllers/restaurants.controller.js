@@ -5,7 +5,6 @@ const bcryptSalt = 10;
 const path = require('path');
 
 
-
 module.exports.index = (req, res) => {
   Restaurant.find({}).sort( { rating: -1 } )
   .then((restaurants) => {
