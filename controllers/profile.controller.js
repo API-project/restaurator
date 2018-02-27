@@ -13,7 +13,7 @@ module.exports.show = (req, res) => {
             if (!user) {
                 next();
             } else {
-                Tweet.find({username: user.username})
+                Restaurant.find({username: user.username})
                     .sort({ createdAt: -1})
                     .then(favourite => {
                         res.render('restaurants/show', {

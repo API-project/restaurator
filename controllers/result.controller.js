@@ -35,7 +35,6 @@ module.exports.result = (req, res, next) => {
               geo_location['lon'] = geo_location.lon.slice(0, geo_location.lon.length - 1);
               const categories = eltenedor ? eltenedor.categories : [];
               const reservation = eltenedor ? eltenedor.reservation : [];
-              const imageUrl = eltenedor ? eltenedor.imageUrl : '';
               JustEat.findOne({geo_location})
                 .then(justeat => {
                   const href = justeat ? justeat.href : '';
@@ -43,7 +42,6 @@ module.exports.result = (req, res, next) => {
                      name: restaurant.name,
                      rating: restaurant.rating,
                      direction: restaurant.direction,
-                     imageUrl,
                      location,
                      place_id: restaurant.place_id,
                      categories,
@@ -54,6 +52,7 @@ module.exports.result = (req, res, next) => {
                   newRestaurant.save()
                     .then(() => {
                       console.log(`${newRestaurant.name} creado`);
+                        console.log(`${newRestaurant.menu} creado`);
                     })
                     .catch(err => {next(err)})
                 })

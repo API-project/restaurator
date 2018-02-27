@@ -24,9 +24,12 @@
     <% }) %>
   </tbody>
 </table>
+
 <% } else { %>
+
   <div class="alert" role="alert">Tu restaurante se ha borrado</div>
   <form action="/restaurants/index" method="get">
     <input type="submit" value="Volver" class="Volver">
   </form>
+
 <% } %>
