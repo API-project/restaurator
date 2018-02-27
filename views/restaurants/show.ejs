@@ -1,5 +1,4 @@
 <div class="container">
-<h1>hola @<%= user.name %></h1>
 
 <table class="table table-striped table-hover">
   <thead>
@@ -8,12 +7,10 @@
       <th>Dirección</th>
       <th>Valoración</th>
       <th>Borrar</th>
-      <th></th>
-
     </tr>
   </thead>
   <tbody>
-    <% restaurants.forEach((restaurant) => { %>
+
       <tr>
 
         <td><%= restaurant.name %></td>
@@ -27,7 +24,6 @@
         </td>
       </tr>
 
-    <% }) %>
   </tbody>
 </table>
 

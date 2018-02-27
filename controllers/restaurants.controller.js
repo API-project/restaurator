@@ -5,14 +5,7 @@ const bcryptSalt = 10;
 const path = require('path');
 
 
-module.exports.index = (req, res) => {
-  Restaurant.find({}).sort( { rating: -1 } )
-  .then((restaurants) => {
-    res.render("restaurants/index", {
-      restaurants: restaurants
-    });
-  }).catch(error => next(error));
-};
+
 
 
 module.exports.new = (req, res) => {
@@ -41,6 +34,14 @@ module.exports.create = (req, res) => {
    });
 };
 
+module.exports.index = (req, res) => {
+  Restaurant.find({}).sort( { rating: -1 } )
+  .then((restaurants) => {
+    res.render("restaurants/index", {
+      restaurants: restaurants
+    });
+  }).catch(error => next(error));
+};
 
 // module.exports.edit = (req, res, next) => {
 //   Restaurant.findById(req.params.id).then((restaurant) => {
@@ -89,26 +90,16 @@ module.exports.like = (req, res, next) => {
         })
 }
 
-
 module.exports.show = (req, res, next) => {
-  User.find({})
-  .then((user) => {
-    Restaurant.find({})
-    .populate('favourite')
-    .then((restaurants) => {
-          // console.log(restaurants)
+    Restaurant.findOne({ restaurant: req.params.restaurant})
+        .then((restaurant) => {
+          console.log(restaurant)
             res.render('restaurants/show', {
-                user: user,
-                restaurants: restaurants
+                restaurant: restaurant
             });
         })
         .catch((error) => {
             res.redirect('/');
             next(error);
-            })
         })
-      .catch((error) => {
-          res.redirect('/');
-          next(error);
-      })
 };
